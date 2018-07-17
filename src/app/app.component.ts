@@ -2,12 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'facade-root',
-  template: `
-  <h1>Universal Facade</h1>
-  <a routerLink="/">Home</a>
-  <router-outlet></router-outlet>
-  `,
-  styles: []
+  templateUrl: 'app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 

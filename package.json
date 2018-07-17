@@ -26,13 +26,13 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "6.0.9",
-    "@angular/cdk": "6.2.1",
+    "@angular/cdk": "6.4.0",
     "@angular/common": "6.0.9",
     "@angular/compiler": "6.0.9",
     "@angular/core": "6.0.9",
     "@angular/forms": "6.0.9",
     "@angular/http": "6.0.9",
-    "@angular/material": "6.2.1",
+    "@angular/material": "6.4.0",
     "@angular/platform-browser": "6.0.9",
     "@angular/platform-browser-dynamic": "6.0.9",
     "@angular/platform-server": "6.0.9",
@@ -41,7 +41,7 @@
     "@nguniversal/express-engine": "6.0.0",
     "@nguniversal/module-map-ngfactory-loader": "6.0.0",
     "core-js": "2.5.7",
-    "rxjs": "6.2.1",
+    "rxjs": "6.2.2",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
@@ -57,9 +57,8 @@
     "pre-commit": "1.2.2",
     "reflect-metadata": "0.1.12",
     "ts-loader": "4.4.2",
-    "tslint": "5.10.0",
+    "tslint": "5.11.0",
     "typescript": "2.7.2",
-    "webpack-cli": "3.0.8",
-    "webpack": "4.16.0"
+    "webpack-cli": "3.0.8"
   }
 }
