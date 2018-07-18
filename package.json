@@ -20,9 +20,10 @@
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:prerender": "cd dist/browser && http-server",
     "serve:ssr": "node dist/server",
+    "lint": "ng lint universal-facade",
+    "e2e": "ng e2e",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "test:cover": "ng test --no-watch --code-coverage --browsers ChromeHeadless"
   },
   "pre-commit": [],
   "private": true,
@@ -56,6 +57,7 @@
     "@types/jasminewd2": "2.0.3",
     "@types/node": "10.5.2",
     "codelyzer": "4.4.2",
+    "coveralls": "3.0.2",
     "cpy-cli": "2.0.0",
     "express": "4.16.3",
     "http-server": "0.11.1",
@@ -67,6 +69,7 @@
     "karma-coverage-istanbul-reporter": "2.0.1",
     "karma-jasmine": "1.1.2",
     "karma-jasmine-html-reporter": "1.2.0",
+    "karma-mocha-reporter": "2.2.5",
     "pre-commit": "1.2.2",
     "protractor": "5.3.2",
     "reflect-metadata": "0.1.12",
