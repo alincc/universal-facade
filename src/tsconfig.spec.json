@@ -1,18 +1,21 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
-        "outDir": "../out-tsc/app",
+        "outDir": "../out-tsc/spec",
         "baseUrl": "./",
         "module": "commonjs",
         "types": [
+            "jasmine",
+            "jasminewd2",
             "node"
         ]
     },
-    "exclude": [
+    "files": [
         "test.ts",
-        "**/*.spec.ts"
+        "polyfills.ts"
     ],
-    "angularCompilerOptions": {
-        "entryModule": "app/app.server.module#AppServerModule"
-    }
+    "include": [
+        "**/*.spec.ts",
+        "**/*.d.ts"
+    ]
 }
