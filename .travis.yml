@@ -1,0 +1,32 @@
+sudo: required
+dist: trusty
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
+language: node_js
+
+node_js:
+  - "6"
+  - "7"
+  - "8"
+
+cache:
+  yarn: true
+
+bundler_args: --retry 5
+
+install:
+  - travis_retry yarn install
+
+before_script:
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+
+script:
+  - yarn run build:ssr
+  - yarn test
+  - yarn e2e
