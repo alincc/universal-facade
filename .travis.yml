@@ -26,5 +26,3 @@ before_script:
 
 script:
   - yarn run build:ssr
-  - yarn test
-  - yarn e2e
