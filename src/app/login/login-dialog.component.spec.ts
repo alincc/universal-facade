@@ -35,4 +35,8 @@ describe('LoginDialogComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('should be able to submit', () => {
+        component.submit();
+    });
+
 });
