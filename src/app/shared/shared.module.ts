@@ -11,11 +11,13 @@ import {
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
+    MatDialogModule,
     MatSelectModule,
     MatListModule,
     MatSidenavModule,
     MatGridListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressBarModule
 } from '@angular/material';
 
 const MODULES = [
@@ -30,11 +32,13 @@ const MODULES = [
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
+    MatDialogModule,
     MatSelectModule,
     MatListModule,
     MatSidenavModule,
     MatGridListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressBarModule
 ];
 
 const PIPES = [
