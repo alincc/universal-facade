@@ -1,6 +1,9 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 
+import { RestService } from './service/rest.service';
+import { ScaffoldService } from './service/scaffold.service';
+
 const MODULES = [
     CommonModule
 ];
@@ -10,7 +13,9 @@ const COMPONENTS = [
 ];
 
 const PROVIDERS = [
-    DatePipe
+    DatePipe,
+    RestService,
+    ScaffoldService
 ];
 
 @NgModule({

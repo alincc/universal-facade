@@ -18,6 +18,10 @@ import { AppComponent } from './app.component';
     ],
     // Since the bootstrapped component is not inherited from your
     // imported AppModule, it needs to be repeated here.
-    bootstrap: [AppComponent],
+    bootstrap: [
+        AppComponent
+    ]
 })
-export class AppServerModule { }
+export class AppServerModule {
+
+}
