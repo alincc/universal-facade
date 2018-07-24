@@ -1,9 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
+
+import { metaReducers, reducers } from './shared/store';
 
 import { routes } from './app.routes';
 
@@ -19,6 +22,9 @@ describe('AppComponent', () => {
             ],
             imports: [
                 RouterTestingModule.withRoutes(routes),
+                StoreModule.forRoot(reducers, {
+                    metaReducers
+                }),
                 SharedModule
             ]
         }).compileComponents();

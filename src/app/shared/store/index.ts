@@ -11,6 +11,7 @@ import * as fromRouter from '@ngrx/router-store';
 import { createSelector } from 'reselect';
 
 import * as fromScaffold from './scaffold/scaffold.reducer';
+import * as fromStore from './store.reducer';
 
 export interface RouterStateUrl {
   url: string;
@@ -45,7 +46,9 @@ export const reducerProvider = [
   { provide: reducerToken, useValue: reducers }
 ];
 
-export const metaReducers: MetaReducer<AppState>[] = [];
+export const metaReducers: MetaReducer<AppState>[] = [
+  fromStore.universalMetaReducer
+];
 
 export const getScaffoldState = (state: AppState) => state.scaffold;
 export const getScaffolding = createSelector(getScaffoldState, fromScaffold.getScaffolding);

@@ -3,7 +3,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 import { Scaffold } from '../../model/scaffold';
 import { ScaffoldService } from '../../../core/service/scaffold.service';
