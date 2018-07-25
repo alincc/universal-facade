@@ -1,4 +1,4 @@
-export interface Filter {
+export type Filter = Readonly<{
     property: string;
     value: string;
-}
+}>;

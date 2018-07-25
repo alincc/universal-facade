@@ -1,4 +1,4 @@
-export interface Header {
+export type Header = Readonly<{
     text: string;
     italicized: boolean;
-}
+}>;

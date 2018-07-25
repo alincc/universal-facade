@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { AppState } from './';
+import { AppState } from '.';
 
 export const StoreActionTypes = {
     REHYDRATE: '[Store] rehydrate'
@@ -12,5 +12,5 @@ export class RehydrateAction implements Action {
     }
 }
 
-export type StoreActions =
+export type RootStoreActions =
     RehydrateAction;

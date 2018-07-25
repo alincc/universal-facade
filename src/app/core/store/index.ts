@@ -8,10 +8,8 @@ import {
 
 import * as fromRouter from '@ngrx/router-store';
 
-import { createSelector } from 'reselect';
-
 import * as fromScaffold from './scaffold/scaffold.reducer';
-import * as fromStore from './store.reducer';
+import * as fromRootStore from './root-store.reducer';
 
 export interface RouterStateUrl {
   url: string;
@@ -31,7 +29,7 @@ export class CustomRouterStateSerializer implements fromRouter.RouterStateSerial
 }
 
 export interface AppState {
-  scaffold: fromScaffold.State;
+  scaffold: fromScaffold.ScaffoldState;
   routerReducer: fromRouter.RouterReducerState;
 }
 
@@ -47,9 +45,5 @@ export const reducerProvider = [
 ];
 
 export const metaReducers: MetaReducer<AppState>[] = [
-  fromStore.universalMetaReducer
+  fromRootStore.universalMetaReducer
 ];
-
-export const getScaffoldState = (state: AppState) => state.scaffold;
-export const getScaffolding = createSelector(getScaffoldState, fromScaffold.getScaffolding);
-export const getScaffold = (name: string) => createSelector([getScaffolding], (scaffolding) => scaffolding[name]);

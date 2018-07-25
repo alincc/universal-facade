@@ -5,10 +5,8 @@ import { PLATFORM_ID, Inject, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule, Store } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+
+import { Store } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,15 +15,11 @@ import { LoginDialogComponent } from './login/login-dialog.component';
 import { routes } from './app.routes';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { RootStoreModule } from './core/store/root-store.module';
 
-import { ScaffoldEffects } from './shared/store/scaffold/scaffold.effects';
-import { StoreEffects } from './shared/store/store.effects';
+import { AppState } from './core/store';
 
-import { CustomRouterStateSerializer, reducerProvider, metaReducers, reducerToken, AppState } from './shared/store';
-
-import { environment } from '../environments/environment';
-
-import * as fromStore from './shared/store/store.actions';
+import * as fromStore from './core/store/root-store.actions';
 
 export const NGRX_STATE = makeStateKey('NGRX_STATE');
 
@@ -44,23 +38,9 @@ export const NGRX_STATE = makeStateKey('NGRX_STATE');
         TransferHttpCacheModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        SharedModule,
         CoreModule.forRoot(),
-        StoreModule.forRoot(reducerToken, {
-            metaReducers
-        }),
-        StoreRouterConnectingModule,
-        EffectsModule.forRoot([
-            ScaffoldEffects,
-            StoreEffects
-        ]),
-        StoreDevtoolsModule.instrument({
-            maxAge: 25,
-        })
-    ],
-    providers: [
-        { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
-        reducerProvider
+        SharedModule,
+        RootStoreModule
     ],
     bootstrap: [
         AppComponent

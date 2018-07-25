@@ -1,7 +1,7 @@
 import { ConditionalType } from './conditional-type';
 
-export interface Conditional {
+export type Conditional = Readonly<{
     type: ConditionalType;
     path: string;
     value: string;
-}
+}>;

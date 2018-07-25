@@ -6,7 +6,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 
 import { Scaffold } from '../../model/scaffold';
-import { ScaffoldService } from '../../../core/service/scaffold.service';
+import { ScaffoldService } from '../../service/scaffold.service';
 
 import * as fromScaffold from './scaffold.actions';
 
@@ -21,8 +21,8 @@ export class ScaffoldEffects {
         ofType(fromScaffold.ScaffoldActionTypes.LOAD),
         switchMap(() =>
             this.scaffoldService.get().pipe(
-                map((scaffolding: Map<string, Scaffold>) => new fromScaffold.LoadScaffoldSuccessAction(scaffolding)),
-                catchError((response) => of(new fromScaffold.LoadScaffoldFailureAction(response)))
+                map((scaffolding: Scaffold[]) => new fromScaffold.LoadScaffoldSuccessAction({ scaffolding })),
+                catchError((error) => of(new fromScaffold.LoadScaffoldFailureAction({ error })))
             )
         )
     );

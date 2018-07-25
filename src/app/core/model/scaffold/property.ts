@@ -4,7 +4,7 @@ import { Header } from './header';
 import { Role } from '../user';
 import { Validation } from './validation';
 
-export interface Property {
+export type Property = Readonly<{
     name: string;
     clazz: string;
     gloss: string;
@@ -30,4 +30,4 @@ export interface Property {
     validations: Validation[];
     whitelist: Role[];
     blacklist: Role[];
-}
+}>;

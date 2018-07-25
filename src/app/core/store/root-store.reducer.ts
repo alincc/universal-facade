@@ -1,4 +1,4 @@
-import * as fromStore from './store.actions';
+import * as fromStore from './root-store.actions';
 
 export function universalMetaReducer(reducer) {
     return (state, action) => {
@@ -12,7 +12,3 @@ export function universalMetaReducer(reducer) {
         return reducer(state, action);
     };
 }
-
-export const appMetaReducers = [
-    universalMetaReducer
-];

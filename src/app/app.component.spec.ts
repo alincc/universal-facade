@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
 
-import { metaReducers, reducers } from './shared/store';
+import { metaReducers, reducers } from './core/store';
 
 import { routes } from './app.routes';
 
