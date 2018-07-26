@@ -9,9 +9,6 @@ describe('FormComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                FormComponent
-            ],
             imports: [
                 SharedModule
             ]
