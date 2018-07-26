@@ -1,43 +1,47 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { SharedModule } from './shared/shared.module';
+import { LoginComponent } from './login.component';
+import { CoreModule } from '../core/core.module';
+import { SharedModule } from '../shared/shared.module';
 
-import { metaReducers, reducers } from './core/store';
+import { metaReducers, reducers } from '../core/store';
 
-import { routes } from './app.routes';
+import { routes } from './login.routes';
 
-describe('AppComponent', () => {
-    let component: AppComponent;
-    let fixture: ComponentFixture<AppComponent>;
+describe('LoginComponent', () => {
+    let component: LoginComponent;
+    let fixture: ComponentFixture<LoginComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                AppComponent,
-                HeaderComponent
+                LoginComponent
             ],
             imports: [
+                CoreModule,
                 SharedModule,
                 StoreModule.forRoot(reducers, {
                     metaReducers
                 }),
                 RouterTestingModule.withRoutes(routes)
+            ],
+            schemas: [
+                CUSTOM_ELEMENTS_SCHEMA
             ]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(AppComponent);
+        fixture = TestBed.createComponent(LoginComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
-    it('should create', async(() => {
+    it('should create', () => {
         expect(component).toBeTruthy();
-    }));
+    });
 
 });

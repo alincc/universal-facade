@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TestBed, inject } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { inject, TestBed } from '@angular/core/testing';
 
 import { RestService } from './rest.service';
 
@@ -9,8 +8,7 @@ describe('RestService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule,
-                RouterTestingModule.withRoutes([])
+                HttpClientTestingModule
             ],
             providers: [
                 RestService

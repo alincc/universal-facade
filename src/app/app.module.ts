@@ -10,7 +10,6 @@ import { Store } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { LoginDialogComponent } from './login/login-dialog.component';
 
 import { routes } from './app.routes';
 import { CoreModule } from './core/core.module';
@@ -26,11 +25,7 @@ export const NGRX_STATE = makeStateKey('NGRX_STATE');
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent,
-        LoginDialogComponent
-    ],
-    entryComponents: [
-        LoginDialogComponent
+        HeaderComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'universal-facade' }),

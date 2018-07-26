@@ -20,6 +20,8 @@ import {
     MatProgressBarModule
 } from '@angular/material';
 
+import { FormComponent } from './form/form.component';
+
 const MODULES = [
     CommonModule,
     FormsModule,
@@ -46,7 +48,7 @@ const PIPES = [
 ];
 
 const COMPONENTS = [
-
+    FormComponent
 ];
 
 const ENTRY_COMPONENTS = [

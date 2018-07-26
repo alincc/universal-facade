@@ -1,0 +1,15 @@
+<form *ngIf="loginForm | async; let loginForm" [formGroup]="loginForm" (ngSubmit)="submit(loginForm.value)" novalidate>
+  <mat-card>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Username" formControlName="username" autofocus="true" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" formControlName="password" autocomplete="new-password" />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
