@@ -21,6 +21,7 @@ import {
 } from '@angular/material';
 
 import { FormComponent } from './form/form.component';
+import { FormDialogComponent } from './form/dialog/form-dialog.component';
 
 const MODULES = [
     CommonModule,
@@ -52,7 +53,7 @@ const COMPONENTS = [
 ];
 
 const ENTRY_COMPONENTS = [
-
+    FormDialogComponent
 ];
 
 @NgModule({

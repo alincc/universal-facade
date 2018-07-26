@@ -2,6 +2,6 @@
   <mat-toolbar-row>
     <span class="toolbar-link" [routerLink]="['/']">Universal Facade</span>
     <span class="toolbar-spacer"></span>
-    <span class="toolbar-link" [routerLink]="['/login']">Login</span>
+    <span class="toolbar-link" (click)="openLoginDialog()">Login</span>
   </mat-toolbar-row>
 </mat-toolbar>

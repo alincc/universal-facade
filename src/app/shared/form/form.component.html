@@ -1,3 +1,14 @@
-<div>
-    <h1>Form!!!</h1>
-</div>
+<form *ngIf="form | async; let form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidate>
+  <mat-card>
+    <mat-card-content *ngIf="scaffold | async; let scaffold">
+      <mat-form-field *ngFor="let property of scaffold.properties">
+        <input matInput [type]="property.type" [placeholder]="property.gloss" [formControlName]="property.name" [autofocus]="property.autofocus"
+          [autocomplete]="property.autocomplete" />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="default" type="button" (click)="onCancel()">{{cancelLabel}}</button>
+      <button mat-raised-button color="primary" type="submit">{{submitLabel}}</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

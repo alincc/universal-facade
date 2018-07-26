@@ -1,7 +1,12 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
 
+import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../shared.module';
 import { FormComponent } from './form.component';
+
+import { metaReducers, reducers } from '../../core/store';
 
 describe('FormComponent', () => {
     let component: FormComponent;
@@ -10,7 +15,14 @@ describe('FormComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                SharedModule
+                CoreModule,
+                SharedModule,
+                StoreModule.forRoot(reducers, {
+                    metaReducers
+                }),
+            ],
+            schemas: [
+                CUSTOM_ELEMENTS_SCHEMA
             ]
         });
     }));

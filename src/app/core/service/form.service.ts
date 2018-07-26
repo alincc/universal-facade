@@ -20,13 +20,18 @@ export class FormService {
     }
 
     public getFormGroup(name: string): Observable<FormGroup> {
-        return this.store.select(selectScaffoldByName(name)).pipe(
-            filter((scaffold: Scaffold) => scaffold !== undefined),
+        return this.getScaffold(name).pipe(
             map((scaffold: Scaffold) => {
                 const formGroup = this.buildFormGroup(scaffold);
                 formGroup.reset();
                 return formGroup;
             })
+        );
+    }
+
+    public getScaffold(name: string): Observable<Scaffold> {
+        return this.store.select(selectScaffoldByName(name)).pipe(
+            filter((scaffold: Scaffold) => scaffold !== undefined)
         );
     }
 
