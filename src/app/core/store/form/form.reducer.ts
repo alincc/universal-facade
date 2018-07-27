@@ -32,7 +32,7 @@ export function reducer(state = initialState, action: FormActions): FormState {
             return {
                 ...state,
                 submitting: false,
-                error: action.payload.error,
+                error: action.payload.response.error,
                 response: undefined
             };
         default:

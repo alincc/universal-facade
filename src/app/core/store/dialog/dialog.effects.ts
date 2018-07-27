@@ -26,14 +26,21 @@ export class DialogEffects {
         ofType(fromDialog.DialogActionTypes.OPEN),
         map((action: fromDialog.OpenDialogAction) => action.payload),
         map((payload: { dialog: DialogRef, action: any }) => {
-            const dialogConfig = new MatDialogConfig();
-            dialogConfig.autoFocus = true;
 
-            const dialogRef = this.dialog.open(payload.dialog.ref, dialogConfig);
+            // TODO: conditionally use full screen if in mobile view
 
-            dialogRef.componentInstance.name = payload.dialog.config.name;
-            if (payload.dialog.config.submitLabel) {
-                dialogRef.componentInstance.submitLabel = payload.dialog.config.submitLabel;
+            const dialogRef = this.dialog.open(payload.dialog.ref, {
+                autoFocus: true,
+                // maxWidth: '100vw',
+                // width: '100%',
+                // maxHeight: '100vh',
+                // height: '100%',
+            });
+
+            for (const key in payload.dialog.config) {
+                if (payload.dialog.config.hasOwnProperty(key)) {
+                    dialogRef.componentInstance[key] = payload.dialog.config[key];
+                }
             }
 
             dialogRef.componentInstance.action = payload.action;

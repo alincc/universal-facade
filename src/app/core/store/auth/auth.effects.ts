@@ -38,7 +38,7 @@ export class AuthEffects {
     @Effect() loginFailure = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.LOGIN_FAILURE),
         map((action: fromAuth.LoginFailureAction) => action.payload),
-        map((error: any) => new fromForm.SubmitFormFailureAction({ error }))
+        map((response: any) => new fromForm.SubmitFormFailureAction({ response }))
     );
 
 }

@@ -1,13 +1,15 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 import { Observable } from 'rxjs';
 
 import { FormService } from '../../core/service/form.service';
 
+import { AlertComponent } from '../alert/alert.component';
+import { AbstractFormComponent } from './abstract-form.component';
 import { Scaffold, Property, Validation } from '../../core/model/scaffold';
 import { validatorConversion } from '../../core/utility/validation.utility';
-import { AbstractFormComponent } from './abstract-form.component';
 
 @Component({
     selector: 'facade-form',
@@ -21,13 +23,21 @@ export class FormComponent extends AbstractFormComponent implements OnInit {
 
     public scaffold: Observable<Scaffold>;
 
-    constructor(private formService: FormService) {
+    constructor(private formService: FormService, public snackBar: MatSnackBar) {
         super();
     }
 
     ngOnInit() {
-        this.form = this.formService.getForm(this.name);
-        this.scaffold = this.formService.getScaffold(this.name);
+        this.form = this.formService.getForm(this.scaffoldName);
+        this.scaffold = this.formService.getScaffold(this.scaffoldName);
+        // TODO: use alert store and effect on form failure
+        this.formService.getError(this.scaffoldName).subscribe((response: any) => {
+            const alertRef = this.snackBar.openFromComponent(AlertComponent, {
+                duration: 10000,
+                verticalPosition: 'top'
+            });
+            alertRef.instance.message = response.error;
+        });
     }
 
     public onSubmit(formValue): void {

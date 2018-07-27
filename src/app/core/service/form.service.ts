@@ -11,8 +11,7 @@ import { AppState } from '../store';
 import { Scaffold, Property } from '../model/scaffold';
 import { createValidators } from '../utility/validation.utility';
 import { selectScaffoldByName } from '../store/scaffold';
-
-import * as fromForm from '../store/form/form.actions';
+import { selectFormError } from '../store/form';
 
 @Injectable()
 export class FormService {
@@ -38,6 +37,12 @@ export class FormService {
     public getScaffold(name: string): Observable<Scaffold> {
         return this.store.select(selectScaffoldByName(name)).pipe(
             filter((scaffold: Scaffold) => scaffold !== undefined)
+        );
+    }
+
+    public getError(name: string): Observable<any> {
+        return this.store.select(selectFormError).pipe(
+            filter((error: any) => error !== undefined)
         );
     }
 

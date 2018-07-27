@@ -25,7 +25,8 @@ export class HeaderComponent {
             dialog: {
                 ref: FormDialogComponent,
                 config: {
-                    name: 'LoginRequest',
+                    title: 'Login',
+                    scaffoldName: 'LoginRequest',
                     submitLabel: 'Login'
                 }
             },
