@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 
 import { FormService } from '../../core/service/form.service';
 
-import { Scaffold } from '../../core/model/scaffold';
+import { Scaffold, Property, Validation } from '../../core/model/scaffold';
+import { validatorConversion } from '../../core/utility/validation.utility';
 
 @Component({
     selector: 'facade-form',
@@ -44,6 +45,22 @@ export class FormComponent implements OnInit {
 
     public onCancel(): void {
         this.cancel();
+    }
+
+    public getInvalidMessage(form: FormGroup, property: Property): string {
+        let message = '';
+        property.validations.forEach((validation: Validation) => {
+            const validator = validatorConversion[validation.name];
+            if (validator) {
+                const control = form.controls[property.name];
+                if (!control.valid && control.errors && control.errors[validator.key]) {
+                    message += validation.message + ' ';
+                }
+            } else {
+                console.warn('Unknown validation', validation);
+            }
+        });
+        return message;
     }
 
 }

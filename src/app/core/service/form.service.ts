@@ -42,6 +42,7 @@ export class FormService {
                 disabled: property.disabled
             }, Validators.compose(property.validate ? createValidators(property.validations) : []));
         });
+        console.log(this.formBuilder.group(formControls));
         return this.formBuilder.group(formControls);
     }
 
