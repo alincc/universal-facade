@@ -6,8 +6,10 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { AuthService } from '../../service/auth.service';
 
-import * as fromAuth from './auth.actions';
 import { User } from '../../model/user';
+
+import * as fromAuth from './auth.actions';
+import * as fromForm from '../form/form.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -15,7 +17,6 @@ export class AuthEffects {
     constructor(private actions: Actions, private authService: AuthService) {
 
     }
-
 
     @Effect() login = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.LOGIN),
@@ -26,6 +27,18 @@ export class AuthEffects {
                 catchError((error) => of(new fromAuth.LoginFailureAction({ error })))
             )
         )
+    );
+
+    @Effect() loginSuccess = this.actions.pipe(
+        ofType(fromAuth.AuthActionTypes.LOGIN_SUCCESS),
+        map((action: fromAuth.LoginFailureAction) => action.payload),
+        map((payload: User) => new fromForm.SubmitFormSuccessAction({ response: payload }))
+    );
+
+    @Effect() loginFailure = this.actions.pipe(
+        ofType(fromAuth.AuthActionTypes.LOGIN_FAILURE),
+        map((action: fromAuth.LoginFailureAction) => action.payload),
+        map((error: any) => new fromForm.SubmitFormFailureAction({ error }))
     );
 
 }

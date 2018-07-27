@@ -21,8 +21,8 @@ export class FormService {
 
     }
 
-    public submitForm(request: { submit: Action, success: Action, failure: Action, data?: any }): void {
-        this.store.dispatch(new fromForm.SubmitFormAction(request));
+    public submit(action: Action): void {
+        this.store.dispatch(action);
     }
 
     public getForm(name: string): Observable<FormGroup> {

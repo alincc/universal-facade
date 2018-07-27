@@ -26,11 +26,7 @@ export class FormComponent implements OnInit {
 
     @Input() cancelLabel = 'Cancel';
 
-    @Input() request: {
-        submit: any,
-        success: any,
-        failure: any
-    };
+    @Input() action: any;
 
     public form: Observable<FormGroup>;
 
@@ -47,13 +43,7 @@ export class FormComponent implements OnInit {
 
     public onSubmit(formValue): void {
         this.submit(formValue);
-
-        this.formService.submitForm({
-            ...this.request,
-            ...{
-                data: formValue
-            }
-        });
+        this.formService.submit(new this.action(formValue));
     }
 
     public onCancel(): void {
@@ -74,6 +64,10 @@ export class FormComponent implements OnInit {
             }
         });
         return message;
+    }
+
+    public disabled(form: FormGroup): boolean {
+        return !form.valid || form.pristine;
     }
 
 }

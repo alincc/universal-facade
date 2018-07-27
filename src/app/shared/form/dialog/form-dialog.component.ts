@@ -18,10 +18,6 @@ export class FormDialogComponent {
 
     @Input() cancelLabel = 'Cancel';
 
-    @Input() request: {
-        submit: any,
-        success: any,
-        failure: any,
-    };
+    @Input() action: any;
 
 }

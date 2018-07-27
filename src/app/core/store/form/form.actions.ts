@@ -8,7 +8,7 @@ export enum FormActionTypes {
 
 export class SubmitFormAction implements Action {
     readonly type = FormActionTypes.SUBMIT;
-    constructor(public payload: { submit: any, success: any, failure: any, data?: any }) { }
+    constructor(public payload: { action: Action }) { }
 }
 
 export class SubmitFormSuccessAction implements Action {

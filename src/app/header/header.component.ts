@@ -27,11 +27,7 @@ export class HeaderComponent {
         loginDialogRef.componentInstance.submit = (data) => console.log(data);
         loginDialogRef.componentInstance.cancel = () => loginDialogRef.close();
 
-        loginDialogRef.componentInstance.request = {
-            submit: fromAuth.LoginAction,
-            success: fromAuth.LoginSuccessAction,
-            failure: fromAuth.LoginFailureAction,
-        };
+        loginDialogRef.componentInstance.action = fromAuth.LoginAction;
     }
 
 }
