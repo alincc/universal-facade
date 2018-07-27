@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { MatDialogRef } from '@angular/material';
 
 export enum FormActionTypes {
     SUBMIT = '[Form] submit form',
@@ -13,7 +14,6 @@ export class SubmitFormAction implements Action {
 
 export class SubmitFormSuccessAction implements Action {
     readonly type = FormActionTypes.SUBMIT_SUCCESS;
-    constructor(public payload: { response: any }) { }
 }
 
 export class SubmitFormFailureAction implements Action {

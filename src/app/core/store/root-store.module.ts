@@ -7,6 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 
 import { AuthEffects } from './auth/auth.effects';
+import { DialogEffects } from './dialog/dialog.effects';
 import { FormEffects } from './form/form.effects';
 import { ScaffoldEffects } from './scaffold/scaffold.effects';
 import { RootStoreEffects } from './root-store.effects';
@@ -24,6 +25,7 @@ import { CustomRouterStateSerializer, reducerProvider, metaReducers, reducerToke
             RootStoreEffects,
             ScaffoldEffects,
             FormEffects,
+            DialogEffects,
             AuthEffects
         ]),
         StoreDevtoolsModule.instrument({

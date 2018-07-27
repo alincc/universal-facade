@@ -7,6 +7,7 @@ import { FormService } from '../../core/service/form.service';
 
 import { Scaffold, Property, Validation } from '../../core/model/scaffold';
 import { validatorConversion } from '../../core/utility/validation.utility';
+import { AbstractFormComponent } from './abstract-form.component';
 
 @Component({
     selector: 'facade-form',
@@ -14,26 +15,14 @@ import { validatorConversion } from '../../core/utility/validation.utility';
     styleUrls: ['./form.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class FormComponent implements OnInit {
-
-    @Input() name: string;
-
-    @Input() submit: Function;
-
-    @Input() cancel: Function;
-
-    @Input() submitLabel = 'Submit';
-
-    @Input() cancelLabel = 'Cancel';
-
-    @Input() action: any;
+export class FormComponent extends AbstractFormComponent implements OnInit {
 
     public form: Observable<FormGroup>;
 
     public scaffold: Observable<Scaffold>;
 
     constructor(private formService: FormService) {
-
+        super();
     }
 
     ngOnInit() {
@@ -42,7 +31,6 @@ export class FormComponent implements OnInit {
     }
 
     public onSubmit(formValue): void {
-        this.submit(formValue);
         this.formService.submit(new this.action(formValue));
     }
 

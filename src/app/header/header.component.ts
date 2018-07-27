@@ -1,9 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { Store } from '@ngrx/store';
+
+import { AppState } from '../core/store';
 
 import { FormDialogComponent } from '../shared/form/dialog/form-dialog.component';
 
 import * as fromAuth from '../core/store/auth/auth.actions';
+import * as fromDialog from '../core/store/dialog/dialog.actions';
 
 @Component({
     selector: 'facade-header',
@@ -13,21 +16,21 @@ import * as fromAuth from '../core/store/auth/auth.actions';
 })
 export class HeaderComponent {
 
-    constructor(private loginDialog: MatDialog) {
+    constructor(private store: Store<AppState>) {
 
     }
 
     public openLoginDialog() {
-        const loginDialogConfig = new MatDialogConfig();
-        loginDialogConfig.autoFocus = true;
-
-        const loginDialogRef = this.loginDialog.open(FormDialogComponent, loginDialogConfig);
-        loginDialogRef.componentInstance.name = 'LoginRequest';
-        loginDialogRef.componentInstance.submitLabel = 'Login';
-        loginDialogRef.componentInstance.submit = (data) => console.log(data);
-        loginDialogRef.componentInstance.cancel = () => loginDialogRef.close();
-
-        loginDialogRef.componentInstance.action = fromAuth.LoginAction;
+        this.store.dispatch(new fromDialog.OpenDialogAction({
+            dialog: {
+                ref: FormDialogComponent,
+                config: {
+                    name: 'LoginRequest',
+                    submitLabel: 'Login'
+                }
+            },
+            action: fromAuth.LoginAction
+        }));
     }
 
 }

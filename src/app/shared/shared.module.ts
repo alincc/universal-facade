@@ -20,6 +20,7 @@ import {
     MatProgressBarModule
 } from '@angular/material';
 
+import { DialogComponent } from './dialog/dialog.component';
 import { FormComponent } from './form/form.component';
 import { FormDialogComponent } from './form/dialog/form-dialog.component';
 
@@ -53,6 +54,7 @@ const COMPONENTS = [
 ];
 
 const ENTRY_COMPONENTS = [
+    DialogComponent,
     FormDialogComponent
 ];
 
