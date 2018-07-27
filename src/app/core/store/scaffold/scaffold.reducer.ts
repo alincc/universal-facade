@@ -23,12 +23,14 @@ export function reducer(state = initialState, action: ScaffoldActions): Scaffold
         case ScaffoldActionTypes.LOAD:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                error: undefined
             };
         case ScaffoldActionTypes.LOAD_SUCCESS:
             return adapter.addAll(action.payload.scaffolding, {
                 ...state,
-                loading: false
+                loading: false,
+                error: undefined
             });
         case ScaffoldActionTypes.LOAD_FAILURE:
             return {

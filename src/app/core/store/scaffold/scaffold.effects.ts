@@ -1,9 +1,8 @@
-import { catchError, map, switchMap } from 'rxjs/operators';
-
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { Scaffold } from '../../model/scaffold';
 import { ScaffoldService } from '../../service/scaffold.service';

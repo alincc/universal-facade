@@ -1,25 +1,31 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Store } from '@ngrx/store';
+import { Store, Action } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 
 import { AppState } from '../store';
 
 import { Scaffold, Property } from '../model/scaffold';
 import { createValidators } from '../utility/validation.utility';
 import { selectScaffoldByName } from '../store/scaffold';
-import { map, filter } from 'rxjs/operators';
+
+import * as fromForm from '../store/form/form.actions';
 
 @Injectable()
 export class FormService {
 
-    constructor(private formBuilder: FormBuilder, private store: Store<AppState>) {
+    constructor(private builder: FormBuilder, private store: Store<AppState>) {
 
     }
 
-    public getFormGroup(name: string): Observable<FormGroup> {
+    public submitForm(request: { submit: Action, success: Action, failure: Action, data?: any }): void {
+        this.store.dispatch(new fromForm.SubmitFormAction(request));
+    }
+
+    public getForm(name: string): Observable<FormGroup> {
         return this.getScaffold(name).pipe(
             map((scaffold: Scaffold) => {
                 const formGroup = this.buildFormGroup(scaffold);
@@ -42,8 +48,7 @@ export class FormService {
                 disabled: property.disabled
             }, Validators.compose(property.validate ? createValidators(property.validations) : []));
         });
-        console.log(this.formBuilder.group(formControls));
-        return this.formBuilder.group(formControls);
+        return this.builder.group(formControls);
     }
 
 }

@@ -3,6 +3,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { FormDialogComponent } from '../shared/form/dialog/form-dialog.component';
 
+import * as fromAuth from '../core/store/auth/auth.actions';
+
 @Component({
     selector: 'facade-header',
     templateUrl: './header.component.html',
@@ -24,6 +26,12 @@ export class HeaderComponent {
         loginDialogRef.componentInstance.submitLabel = 'Login';
         loginDialogRef.componentInstance.submit = (data) => console.log(data);
         loginDialogRef.componentInstance.cancel = () => loginDialogRef.close();
+
+        loginDialogRef.componentInstance.request = {
+            submit: fromAuth.LoginAction,
+            success: fromAuth.LoginSuccessAction,
+            failure: fromAuth.LoginFailureAction,
+        };
     }
 
 }

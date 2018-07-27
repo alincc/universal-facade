@@ -26,6 +26,12 @@ export class FormComponent implements OnInit {
 
     @Input() cancelLabel = 'Cancel';
 
+    @Input() request: {
+        submit: any,
+        success: any,
+        failure: any
+    };
+
     public form: Observable<FormGroup>;
 
     public scaffold: Observable<Scaffold>;
@@ -35,12 +41,19 @@ export class FormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.form = this.formService.getFormGroup(this.name);
+        this.form = this.formService.getForm(this.name);
         this.scaffold = this.formService.getScaffold(this.name);
     }
 
     public onSubmit(formValue): void {
         this.submit(formValue);
+
+        this.formService.submitForm({
+            ...this.request,
+            ...{
+                data: formValue
+            }
+        });
     }
 
     public onCancel(): void {

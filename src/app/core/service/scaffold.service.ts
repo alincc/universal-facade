@@ -14,8 +14,8 @@ export class ScaffoldService {
 
     }
 
-    public get(): Observable<Map<string, Scaffold>> {
-        return this.restService.get<Map<string, Scaffold>>(environment.service + '/scaffolding');
+    public get(): Observable<Scaffold[]> {
+        return this.restService.get<Scaffold[]>(environment.service + '/scaffolding');
     }
 
 }
