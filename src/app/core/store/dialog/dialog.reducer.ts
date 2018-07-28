@@ -1,14 +1,35 @@
 import { DialogActions, DialogActionTypes } from './dialog.actions';
 import { Type } from '@angular/core';
 
-export interface DialogRef {
+export type DialogConfig = Readonly<{
+    autofocus?: boolean;
+    maxWidth?: string;
+    maxHeight?: string;
+    width?: string;
+    height?: string;
+}>;
+
+export type InstanceConfig = Readonly<{
+    title: string;
+    scaffoldName?: string;
+    submitLabel?: string;
+    cancelLabel?: string;
+}>;
+
+export type Dialog = Readonly<{
     ref: Type<any>;
-    config: any;
-}
+    config: {
+        dialog: DialogConfig,
+        instance: InstanceConfig
+    };
+}>;
 
 export interface DialogState {
     open: boolean;
-    config: any;
+    config: {
+        dialog: DialogConfig,
+        instance: InstanceConfig
+    };
 }
 
 export const initialState: DialogState = {

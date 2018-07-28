@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { DialogRef } from './dialog.reducer';
+import { Dialog } from './dialog.reducer';
 import { MatDialogRef } from '@angular/material';
 
 export enum DialogActionTypes {
@@ -9,7 +9,7 @@ export enum DialogActionTypes {
 
 export class OpenDialogAction implements Action {
     readonly type = DialogActionTypes.OPEN;
-    constructor(public payload: { dialog: DialogRef, action: any }) { }
+    constructor(public payload: { dialog: Dialog, action: any }) { }
 }
 
 export class CloseDialogAction implements Action {

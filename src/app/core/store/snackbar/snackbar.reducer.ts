@@ -3,7 +3,7 @@ import { Type } from '@angular/core';
 
 export type SnackbarType = 'info' | 'success' | 'warning' | 'danger';
 
-export type SnackbarConfir = Readonly<{
+export type SnackbarConfig = Readonly<{
     timeout: number;
     panelClass?: string;
     type: SnackbarType;
@@ -12,12 +12,12 @@ export type SnackbarConfir = Readonly<{
 
 export type Snackbar = Readonly<{
     ref: Type<any>;
-    config: SnackbarConfir;
+    config: SnackbarConfig;
 }>;
 
 export type SnackbarState = Readonly<{
     open: boolean;
-    config: SnackbarConfir;
+    config: SnackbarConfig;
 }>;
 
 export const initialState: SnackbarState = {

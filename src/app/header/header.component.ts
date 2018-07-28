@@ -25,9 +25,14 @@ export class HeaderComponent {
             dialog: {
                 ref: FormDialogComponent,
                 config: {
-                    title: 'Login',
-                    scaffoldName: 'LoginRequest',
-                    submitLabel: 'Login'
+                    dialog: {
+                        autofocus: true,
+                    },
+                    instance: {
+                        title: 'Login',
+                        scaffoldName: 'LoginRequest',
+                        submitLabel: 'Login'
+                    }
                 }
             },
             action: fromAuth.LoginAction
