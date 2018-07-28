@@ -6,11 +6,11 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 
-import { AlertEffects } from './alert/alert.effects';
 import { AuthEffects } from './auth/auth.effects';
 import { DialogEffects } from './dialog/dialog.effects';
 import { FormEffects } from './form/form.effects';
 import { ScaffoldEffects } from './scaffold/scaffold.effects';
+import { SnackbarEffects } from './snackbar/snackbar.effects';
 import { RootStoreEffects } from './root-store.effects';
 
 import { CustomRouterStateSerializer, reducerProvider, metaReducers, reducerToken } from '.';
@@ -24,11 +24,11 @@ import { CustomRouterStateSerializer, reducerProvider, metaReducers, reducerToke
         StoreRouterConnectingModule,
         EffectsModule.forRoot([
             RootStoreEffects,
+            SnackbarEffects,
             ScaffoldEffects,
             FormEffects,
             DialogEffects,
-            AuthEffects,
-            AlertEffects
+            AuthEffects
         ]),
         StoreDevtoolsModule.instrument({
             maxAge: 25,

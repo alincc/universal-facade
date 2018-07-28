@@ -8,6 +8,10 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 })
 export class AlertComponent {
 
+    @Input() type: string;
+
     @Input() message: string;
+
+    @Input() dismiss: any;
 
 }

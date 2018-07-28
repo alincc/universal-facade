@@ -17,7 +17,11 @@ $facade-primary: mat-palette($mat-indigo);
 $facade-accent:  mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$facade-warn:    mat-palette($mat-red);
+
+$facade-info:    mat-palette($mat-light-blue);
+$facade-success: mat-palette($mat-green);
+$facade-warn:    mat-palette($mat-orange);
+$facade-danger:  mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $facade-theme:   mat-light-theme($facade-primary, $facade-accent, $facade-warn);
@@ -30,3 +34,8 @@ $facade-theme:   mat-light-theme($facade-primary, $facade-accent, $facade-warn);
 body {
   margin: 0;
 }
+
+$info:    mat-color($facade-info);
+$success: mat-color($facade-success);
+$warning: mat-color($facade-warn);
+$danger:  mat-color($facade-danger);

@@ -9,7 +9,7 @@ import { AlertComponent } from '../../../shared/alert/alert.component';
 
 import { selectDialogIsOpen } from '../dialog';
 
-import * as fromAlert from '../alert/alert.actions';
+import * as fromSnackbar from '../snackbar/snackbar.actions';
 import * as fromDialog from '../dialog/dialog.actions';
 import * as fromForm from './form.actions';
 
@@ -37,10 +37,13 @@ export class FormEffects {
     @Effect({ dispatch: false }) formSubmitFailure = this.actions.pipe(
         ofType(fromForm.FormActionTypes.SUBMIT_FAILURE),
         map((action: fromForm.SubmitFormFailureAction) => action.payload),
-        map((payload: { response: any }) => this.store.dispatch(new fromAlert.OpenAlertAction({
-            alert: {
+        map((payload: { response: any }) => this.store.dispatch(new fromSnackbar.OpenSnackbarAction({
+            snackbar: {
                 ref: AlertComponent,
                 config: {
+                    timeout: 100000,
+                    panelClass: 'form-snack-bar-panel',
+                    type: 'danger',
                     message: payload.response.error
                 }
             }
