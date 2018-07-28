@@ -19,7 +19,7 @@ export class LoginSuccessAction implements Action {
 
 export class LoginFailureAction implements Action {
     readonly type = AuthActionTypes.LOGIN_FAILURE;
-    constructor(public payload: { error: any }) { }
+    constructor(public payload: { response: any }) { }
 }
 
 export type AuthActions =

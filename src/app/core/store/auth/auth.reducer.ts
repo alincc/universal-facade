@@ -34,7 +34,7 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
                 ...state,
                 processing: false,
                 user: undefined,
-                error: action.payload.error
+                error: action.payload.response
             };
         default:
             return state;

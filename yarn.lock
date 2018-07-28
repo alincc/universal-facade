@@ -240,15 +240,15 @@
     webpack-sources "^1.1.0"
 
 "@nguniversal/common@6.0.0":
-  version v6.0.0
+  version "6.0.0"
   resolved "https://registry.yarnpkg.com/@nguniversal/common/-/common-6.0.0.tgz#50e4b80d08618064e3404306b24b97877db9007d"
 
 "@nguniversal/express-engine@6.0.0":
-  version v6.0.0
+  version "6.0.0"
   resolved "https://registry.yarnpkg.com/@nguniversal/express-engine/-/express-engine-6.0.0.tgz#f8bc7b5e940afb1ffdbdcb1bb22665d440ea0b0b"
 
 "@nguniversal/module-map-ngfactory-loader@6.0.0":
-  version v6.0.0
+  version "6.0.0"
   resolved "https://registry.yarnpkg.com/@nguniversal/module-map-ngfactory-loader/-/module-map-ngfactory-loader-6.0.0.tgz#0dd26c3f1c26d17bb21b8dfc0da53d82b7f11028"
 
 "@nodelib/fs.stat@^1.0.1":
@@ -285,9 +285,9 @@
   dependencies:
     "@types/jasmine" "*"
 
-"@types/node@10.5.3":
-  version "10.5.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.3.tgz#5bcfaf088ad17894232012877669634c06b20cc5"
+"@types/node@10.5.4":
+  version "10.5.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.4.tgz#6eccc158504357d1da91434d75e86acde94bb10b"
 
 "@types/node@^6.0.46":
   version "6.0.114"

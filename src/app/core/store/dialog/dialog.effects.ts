@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 import { map } from 'rxjs/operators';
 
-import { AppState } from '../';
+import { AppState } from '..';
 
 import { DialogRef } from './dialog.reducer';
 

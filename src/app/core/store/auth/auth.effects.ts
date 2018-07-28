@@ -24,7 +24,7 @@ export class AuthEffects {
         switchMap((payload: { username: string, password: string }) =>
             this.authService.login(payload.username, payload.password).pipe(
                 map((user: User) => new fromAuth.LoginSuccessAction({ user })),
-                catchError((error) => of(new fromAuth.LoginFailureAction({ error })))
+                catchError((response) => of(new fromAuth.LoginFailureAction({ response })))
             )
         )
     );
@@ -38,6 +38,7 @@ export class AuthEffects {
     @Effect() loginFailure = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.LOGIN_FAILURE),
         map((action: fromAuth.LoginFailureAction) => action.payload),
+        map((payload: { response: any }) => payload.response),
         map((response: any) => new fromForm.SubmitFormFailureAction({ response }))
     );
 

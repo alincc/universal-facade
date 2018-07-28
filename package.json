@@ -63,7 +63,7 @@
     "@ngrx/schematics": "6.0.1",
     "@types/jasmine": "2.8.8",
     "@types/jasminewd2": "2.0.3",
-    "@types/node": "10.5.3",
+    "@types/node": "10.5.4",
     "codelyzer": "4.4.2",
     "coveralls": "3.0.2",
     "cpy-cli": "2.0.0",
