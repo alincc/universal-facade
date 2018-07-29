@@ -16,6 +16,10 @@ export class AuthService {
 
     }
 
+    public hasSession(): boolean {
+        return this.restService.hasSession();
+    }
+
     public login(username, password): Observable<User> {
         const headers = new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -27,7 +31,6 @@ export class AuthService {
     }
 
     public getUser(): Observable<User> {
-        console.log('get user');
         return this.restService.get<User>(environment.service + '/user', {
             withCredentials: true
         });

@@ -9,7 +9,7 @@ import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
 
 export function getRequest() {
-    return { cookie: document.cookie };
+    return { headers: { cookie: document.cookie } };
 }
 
 @NgModule({

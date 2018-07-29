@@ -18,6 +18,10 @@ export class RestService {
 
     }
 
+    public hasSession(): boolean {
+        return this.request.headers && this.request.headers['cookie'];
+    }
+
     public get<T>(url: string, options: any = {}): Observable<T> {
         // tslint:disable-next-line:no-shadowed-variable
         return this.processRequest<T>(url, options, (url: string, options: any): any => {
@@ -61,19 +65,19 @@ export class RestService {
     }
 
     private preProcessOptions(options: any): void {
-        if (options.withCredentials) {
-            if (isPlatformServer(this.platformId)) {
-                if (this.request.headers) {
-                    if (!options.headers) {
-                        options.headers = new HttpHeaders({
-                            'cookie': this.request.headers['cookie']
-                        });
-                    } else {
-                        options.headers = (options.headers as HttpHeaders).set('cookie', this.request.headers['cookie']);
-                    }
-                }
+        if (this.useSession(options)) {
+            if (!options.headers) {
+                options.headers = new HttpHeaders({
+                    'cookie': this.request.headers['cookie']
+                });
+            } else {
+                options.headers = (options.headers as HttpHeaders).set('cookie', this.request.headers['cookie']);
             }
         }
+    }
+
+    private useSession(options: any): boolean {
+        return options.withCredentials && isPlatformServer(this.platformId) && this.hasSession();
     }
 
 }

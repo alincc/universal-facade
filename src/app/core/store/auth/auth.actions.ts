@@ -7,7 +7,8 @@ export enum AuthActionTypes {
     LOGIN_FAILURE = '[Auth] login failed',
     GET_USER = '[Auth] get user',
     GET_USER_SUCCESS = '[Auth] success getting user',
-    GET_USER_FAILURE = '[Auth] failed getting user'
+    GET_USER_FAILURE = '[Auth] failed getting user',
+    CHECK_SESSION = '[Auth] check session'
 }
 
 export class LoginAction implements Action {
@@ -39,10 +40,15 @@ export class GetUserFailureAction implements Action {
     constructor(public payload: { response: any }) { }
 }
 
+export class CheckSessionAction implements Action {
+    readonly type = AuthActionTypes.CHECK_SESSION;
+}
+
 export type AuthActions =
     LoginAction |
     LoginSuccessAction |
     LoginFailureAction |
     GetUserAction |
     GetUserSuccessAction |
-    GetUserFailureAction;
+    GetUserFailureAction |
+    CheckSessionAction;

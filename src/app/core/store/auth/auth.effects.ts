@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { defer, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-
-import { AuthService } from '../../service/auth.service';
+import { catchError, map, switchMap, filter } from 'rxjs/operators';
 
 import { User } from '../../model/user';
+
+import { AuthService } from '../../service/auth.service';
 
 import * as fromAuth from './auth.actions';
 import * as fromForm from '../form/form.actions';
@@ -14,7 +14,10 @@ import * as fromForm from '../form/form.actions';
 @Injectable()
 export class AuthEffects {
 
-    constructor(private actions: Actions, private authService: AuthService) {
+    constructor(
+        private actions: Actions,
+        private authService: AuthService
+    ) {
 
     }
 
@@ -52,8 +55,14 @@ export class AuthEffects {
         )
     );
 
+    @Effect() checkSession = this.actions.pipe(
+        ofType(fromAuth.AuthActionTypes.CHECK_SESSION),
+        filter(() => this.authService.hasSession()),
+        map(() => new fromAuth.GetUserAction())
+    );
+
     @Effect() init = defer(() => {
-        return of(new fromAuth.GetUserAction());
+        return of(new fromAuth.CheckSessionAction());
     });
 
 }

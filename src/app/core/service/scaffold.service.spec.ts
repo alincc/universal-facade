@@ -3,12 +3,10 @@ import { inject, TestBed } from '@angular/core/testing';
 
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 
-import { ScaffoldService } from './scaffold.service';
 import { RestService } from './rest.service';
+import { ScaffoldService } from './scaffold.service';
 
-export function getRequest() {
-    return {};
-}
+import { getRequest } from '../../app.browser.module';
 
 describe('ScaffoldService', () => {
 

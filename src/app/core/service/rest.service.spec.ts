@@ -5,9 +5,7 @@ import { REQUEST } from '@nguniversal/express-engine/tokens';
 
 import { RestService } from './rest.service';
 
-export function getRequest() {
-    return {};
-}
+import { getRequest } from '../../app.browser.module';
 
 describe('RestService', () => {
 

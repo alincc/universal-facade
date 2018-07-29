@@ -28,7 +28,6 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
             };
         case AuthActionTypes.LOGIN_SUCCESS:
         case AuthActionTypes.GET_USER_SUCCESS:
-            console.log('success', action.payload.user.username);
             return {
                 ...state,
                 processing: false,
@@ -38,7 +37,6 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
             };
         case AuthActionTypes.LOGIN_FAILURE:
         case AuthActionTypes.GET_USER_FAILURE:
-            console.log('failure', action.payload.response.error);
             return {
                 ...state,
                 processing: false,
