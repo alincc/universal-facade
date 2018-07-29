@@ -1,16 +1,20 @@
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 
-import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { REQUEST } from '@nguniversal/express-engine/tokens';
 
 import { Observable } from 'rxjs';
-
-export const AUTH_TOKEN_HEADER = 'X-Auth-Token';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class RestService {
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        @Inject(PLATFORM_ID) private platformId: Object,
+        @Inject(REQUEST) private request: Request
+    ) {
 
     }
 
@@ -43,15 +47,33 @@ export class RestService {
     }
 
     private processRequest<T>(url: string, options: any, callback: (url: string, options: any) => Observable<T>) {
+        this.preProcessOptions(options);
         return callback(url, options).pipe(map((response: T) => {
             return response;
         }));
     }
 
     private processRequestWithData<T>(url: string, body: any, options: any, callback: (url: string, body: any, options: any) => Observable<T>) {
+        this.preProcessOptions(options);
         return callback(url, body, options).pipe(map((response: T) => {
             return response;
         }));
+    }
+
+    private preProcessOptions(options: any): void {
+        if (options.withCredentials) {
+            if (isPlatformServer(this.platformId)) {
+                if (this.request.headers) {
+                    if (!options.headers) {
+                        options.headers = new HttpHeaders({
+                            'cookie': this.request.headers['cookie']
+                        });
+                    } else {
+                        options.headers = (options.headers as HttpHeaders).set('cookie', this.request.headers['cookie']);
+                    }
+                }
+            }
+        }
     }
 
 }

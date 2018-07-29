@@ -17,9 +17,20 @@ export class AuthService {
     }
 
     public login(username, password): Observable<User> {
-        const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded'
+        });
         const data = `username=${username}&password=${password}`;
-        return this.restService.post<User>(environment.service + '/login', data, { headers });
+        return this.restService.post<User>(environment.service + '/login', data, {
+            headers, withCredentials: true
+        });
+    }
+
+    public getUser(): Observable<User> {
+        console.log('get user');
+        return this.restService.get<User>(environment.service + '/user', {
+            withCredentials: true
+        });
     }
 
 }

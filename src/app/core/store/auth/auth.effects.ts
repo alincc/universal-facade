@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { of } from 'rxjs';
+import { defer, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { AuthService } from '../../service/auth.service';
@@ -32,7 +32,7 @@ export class AuthEffects {
     @Effect() loginSuccess = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.LOGIN_SUCCESS),
         map((action: fromAuth.LoginSuccessAction) => action.payload),
-        map((payload: User) => new fromForm.SubmitFormSuccessAction())
+        map(() => new fromForm.SubmitFormSuccessAction())
     );
 
     @Effect() loginFailure = this.actions.pipe(
@@ -41,5 +41,19 @@ export class AuthEffects {
         map((payload: { response: any }) => payload.response),
         map((response: any) => new fromForm.SubmitFormFailureAction({ response }))
     );
+
+    @Effect() getUser = this.actions.pipe(
+        ofType(fromAuth.AuthActionTypes.GET_USER),
+        switchMap(() =>
+            this.authService.getUser().pipe(
+                map((user: User) => new fromAuth.GetUserSuccessAction({ user })),
+                catchError((response) => of(new fromAuth.GetUserFailureAction({ response })))
+            )
+        )
+    );
+
+    @Effect() init = defer(() => {
+        return of(new fromAuth.GetUserAction());
+    });
 
 }

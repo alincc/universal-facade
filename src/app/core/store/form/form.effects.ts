@@ -42,7 +42,6 @@ export class FormEffects {
                 ref: AlertComponent,
                 config: {
                     timeout: 100000,
-                    panelClass: 'form-snack-bar-panel',
                     type: 'danger',
                     message: payload.response.error
                 }

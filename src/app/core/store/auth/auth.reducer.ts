@@ -3,12 +3,14 @@ import { User } from '../../model/user';
 
 export interface AuthState {
     processing: boolean;
+    authenticated: boolean;
     user: User;
     error: any;
 }
 
 export const initialState: AuthState = {
     processing: false,
+    authenticated: false,
     user: undefined,
     error: undefined
 };
@@ -16,23 +18,31 @@ export const initialState: AuthState = {
 export function reducer(state = initialState, action: AuthActions): AuthState {
     switch (action.type) {
         case AuthActionTypes.LOGIN:
+        case AuthActionTypes.GET_USER:
             return {
                 ...state,
                 processing: true,
+                authenticated: false,
                 user: undefined,
                 error: undefined
             };
         case AuthActionTypes.LOGIN_SUCCESS:
+        case AuthActionTypes.GET_USER_SUCCESS:
+            console.log('success', action.payload.user.username);
             return {
                 ...state,
                 processing: false,
+                authenticated: true,
                 user: action.payload.user,
                 error: undefined
             };
         case AuthActionTypes.LOGIN_FAILURE:
+        case AuthActionTypes.GET_USER_FAILURE:
+            console.log('failure', action.payload.response.error);
             return {
                 ...state,
                 processing: false,
+                authenticated: false,
                 user: undefined,
                 error: action.payload.response
             };
@@ -41,6 +51,7 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
     }
 }
 
-export const isLoginProcessing = (state: AuthState) => state.processing;
-export const getLoginError = (state: AuthState) => state.error;
+export const isProcessing = (state: AuthState) => state.processing;
+export const isAuthenticated = (state: AuthState) => state.authenticated;
+export const getError = (state: AuthState) => state.error;
 export const getUser = (state: AuthState) => state.user;

@@ -4,7 +4,10 @@ import { User } from '../../model/user';
 export enum AuthActionTypes {
     LOGIN = '[Auth] login',
     LOGIN_SUCCESS = '[Auth] login sucessful',
-    LOGIN_FAILURE = '[Auth] login failed'
+    LOGIN_FAILURE = '[Auth] login failed',
+    GET_USER = '[Auth] get user',
+    GET_USER_SUCCESS = '[Auth] success getting user',
+    GET_USER_FAILURE = '[Auth] failed getting user'
 }
 
 export class LoginAction implements Action {
@@ -22,7 +25,24 @@ export class LoginFailureAction implements Action {
     constructor(public payload: { response: any }) { }
 }
 
+export class GetUserAction implements Action {
+    readonly type = AuthActionTypes.GET_USER;
+}
+
+export class GetUserSuccessAction implements Action {
+    readonly type = AuthActionTypes.GET_USER_SUCCESS;
+    constructor(public payload: { user: User }) { }
+}
+
+export class GetUserFailureAction implements Action {
+    readonly type = AuthActionTypes.GET_USER_FAILURE;
+    constructor(public payload: { response: any }) { }
+}
+
 export type AuthActions =
     LoginAction |
     LoginSuccessAction |
-    LoginFailureAction;
+    LoginFailureAction |
+    GetUserAction |
+    GetUserSuccessAction |
+    GetUserFailureAction;
