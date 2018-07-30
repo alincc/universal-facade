@@ -44,7 +44,7 @@ export class FormService {
         scaffold.properties.forEach((property: Property) => {
             formControls[property.name] = new FormControl({
                 disabled: property.disabled
-            }, Validators.compose(property.validate ? createValidators(property.validations) : []));
+            }, Validators.compose(property.validations.length > 0 ? createValidators(property.validations) : []));
         });
         return this.builder.group(formControls);
     }
