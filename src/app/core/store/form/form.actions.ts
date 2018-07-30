@@ -14,6 +14,7 @@ export class SubmitFormAction implements Action {
 
 export class SubmitFormSuccessAction implements Action {
     readonly type = FormActionTypes.SUBMIT_SUCCESS;
+    constructor(public payload: { message: string }) { }
 }
 
 export class SubmitFormFailureAction implements Action {

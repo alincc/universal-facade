@@ -35,7 +35,7 @@ export class AuthEffects {
     @Effect() loginSuccess = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.LOGIN_SUCCESS),
         map((action: fromAuth.LoginSuccessAction) => action.payload),
-        map(() => new fromForm.SubmitFormSuccessAction())
+        map((user: User) => new fromForm.SubmitFormSuccessAction({ message: 'Login success!' }))
     );
 
     @Effect() loginFailure = this.actions.pipe(

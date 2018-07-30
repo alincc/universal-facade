@@ -1,23 +1,34 @@
 import { SnackbarActions, SnackbarActionTypes } from './snackbar.actions';
 import { Type } from '@angular/core';
 
+export type SnackbarPosition = 'top' | 'bottom';
 export type SnackbarType = 'info' | 'success' | 'warning' | 'danger';
 
 export type SnackbarConfig = Readonly<{
-    timeout: number;
+    duration?: number;
     panelClass?: string;
+    verticalPosition?: SnackbarPosition;
+}>;
+
+export type InstanceConfig = Readonly<{
     type: SnackbarType;
     message: string;
 }>;
 
 export type Snackbar = Readonly<{
     ref: Type<any>;
-    config: SnackbarConfig;
+    config: {
+        snackbar: SnackbarConfig,
+        instance: InstanceConfig
+    }
 }>;
 
 export type SnackbarState = Readonly<{
     open: boolean;
-    config: SnackbarConfig;
+    config: {
+        snackbar: SnackbarConfig,
+        instance: InstanceConfig
+    }
 }>;
 
 export const initialState: SnackbarState = {

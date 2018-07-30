@@ -30,15 +30,13 @@ export class SnackbarEffects {
         map((action: fromSnackbar.OpenSnackbarAction) => action.payload),
         map((payload: { snackbar: Snackbar, action?: any }) => {
 
-            const snackbarRef = this.snackBar.openFromComponent(payload.snackbar.ref, {
-                panelClass: payload.snackbar.config.panelClass,
-                duration: payload.snackbar.config.timeout,
-                verticalPosition: 'top'
-            });
+            const snackbarRef = this.snackBar.openFromComponent(payload.snackbar.ref, payload.snackbar.config.snackbar);
 
-            snackbarRef.instance.type = payload.snackbar.config.type;
-
-            snackbarRef.instance.message = payload.snackbar.config.message;
+            for (const key in payload.snackbar.config.instance) {
+                if (payload.snackbar.config.instance.hasOwnProperty(key)) {
+                    snackbarRef.instance[key] = payload.snackbar.config.instance[key];
+                }
+            }
 
             snackbarRef.instance.action = payload.action;
 
