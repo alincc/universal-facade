@@ -1,7 +1,7 @@
-import { TransferHttpCacheModule } from '@nguniversal/common';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 
@@ -15,8 +15,6 @@ export function getRequest() {
 @NgModule({
     imports: [
         BrowserModule.withServerTransition({ appId: 'universal-facade' }),
-        TransferHttpCacheModule,
-        BrowserAnimationsModule,
         AppModule
     ],
     // Since the bootstrapped component is not inherited from your

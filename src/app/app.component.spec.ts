@@ -2,9 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 
+import { SharedModule } from './shared/shared.module';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { SharedModule } from './shared/shared.module';
+import { MenuComponent } from './menu/menu.component';
 
 import { metaReducers, reducers } from './core/store';
 
@@ -18,7 +20,8 @@ describe('AppComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 AppComponent,
-                HeaderComponent
+                HeaderComponent,
+                MenuComponent
             ],
             imports: [
                 SharedModule,

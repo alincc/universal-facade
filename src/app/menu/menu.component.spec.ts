@@ -6,20 +6,20 @@ import { StoreModule } from '@ngrx/store';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 
-import { HeaderComponent } from './header.component';
+import { MenuComponent } from './menu.component';
 
 import { metaReducers, reducers } from '../core/store';
 
 import { routes } from '../app.routes';
 
-describe('HeaderComponent', () => {
-    let component: HeaderComponent;
-    let fixture: ComponentFixture<HeaderComponent>;
+describe('MenuComponent', () => {
+    let component: MenuComponent;
+    let fixture: ComponentFixture<MenuComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                HeaderComponent
+                MenuComponent
             ],
             imports: [
                 RouterTestingModule.withRoutes(routes),
@@ -34,7 +34,7 @@ describe('HeaderComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(HeaderComponent);
+        fixture = TestBed.createComponent(MenuComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

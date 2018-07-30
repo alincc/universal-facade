@@ -9,6 +9,7 @@ import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router
 import { AuthEffects } from './auth/auth.effects';
 import { DialogEffects } from './dialog/dialog.effects';
 import { FormEffects } from './form/form.effects';
+import { MenuEffects } from './menu/menu.effects';
 import { ScaffoldEffects } from './scaffold/scaffold.effects';
 import { SnackbarEffects } from './snackbar/snackbar.effects';
 import { RootStoreEffects } from './root-store.effects';
@@ -26,6 +27,7 @@ import { CustomRouterStateSerializer, reducerProvider, metaReducers, reducerToke
             RootStoreEffects,
             SnackbarEffects,
             ScaffoldEffects,
+            MenuEffects,
             FormEffects,
             DialogEffects,
             AuthEffects

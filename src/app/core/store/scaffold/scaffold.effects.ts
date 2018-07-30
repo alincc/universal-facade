@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { of } from 'rxjs';
+import { defer, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { Scaffold } from '../../model/scaffold';
@@ -26,5 +26,9 @@ export class ScaffoldEffects {
             )
         )
     );
+
+    @Effect() init = defer(() => {
+        return of(new fromScaffold.LoadScaffoldAction());
+    });
 
 }

@@ -1,15 +1,15 @@
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule, makeStateKey, TransferState } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PLATFORM_ID, Inject, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TransferHttpCacheModule } from '@nguniversal/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { Store } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { MenuComponent } from './menu/menu.component';
 
 import { routes } from './app.routes';
 import { CoreModule } from './core/core.module';
@@ -25,13 +25,14 @@ export const NGRX_STATE = makeStateKey('NGRX_STATE');
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent
+        HeaderComponent,
+        MenuComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'universal-facade' }),
-        RouterModule.forRoot(routes),
         TransferHttpCacheModule,
         BrowserAnimationsModule,
+        RouterModule.forRoot(routes),
         HttpClientModule,
         CoreModule.forRoot(),
         SharedModule,
