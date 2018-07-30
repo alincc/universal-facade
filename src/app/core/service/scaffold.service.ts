@@ -15,7 +15,9 @@ export class ScaffoldService {
     }
 
     public get(): Observable<Scaffold[]> {
-        return this.restService.get<Scaffold[]>(environment.service + '/scaffolding');
+        return this.restService.get<Scaffold[]>(environment.service + '/scaffolding', {
+            withCredentials: true
+        });
     }
 
 }

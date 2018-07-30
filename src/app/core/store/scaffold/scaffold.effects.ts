@@ -7,6 +7,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { Scaffold } from '../../model/scaffold';
 import { ScaffoldService } from '../../service/scaffold.service';
 
+import * as fromAuth from '../auth/auth.actions';
 import * as fromScaffold from './scaffold.actions';
 
 @Injectable()
@@ -17,7 +18,7 @@ export class ScaffoldEffects {
     }
 
     @Effect() loadScaffold = this.actions.pipe(
-        ofType(fromScaffold.ScaffoldActionTypes.LOAD),
+        ofType(fromScaffold.ScaffoldActionTypes.LOAD, fromAuth.AuthActionTypes.LOGIN_SUCCESS, fromAuth.AuthActionTypes.GET_USER),
         switchMap(() =>
             this.scaffoldService.get().pipe(
                 map((scaffolding: Scaffold[]) => new fromScaffold.LoadScaffoldSuccessAction({ scaffolding })),

@@ -40,8 +40,7 @@ export class FormEffects {
                     ref: AlertComponent,
                     config: {
                         snackbar: {
-                            duration: 15000,
-                            verticalPosition: 'top'
+                            duration: 15000
                         },
                         instance: {
                             type: 'success',
@@ -61,8 +60,7 @@ export class FormEffects {
                 ref: AlertComponent,
                 config: {
                     snackbar: {
-                        duration: 60000,
-                        verticalPosition: 'top'
+                        duration: 60000
                     },
                     instance: {
                         type: 'danger',

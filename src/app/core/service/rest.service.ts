@@ -19,7 +19,7 @@ export class RestService {
     }
 
     public hasSession(): boolean {
-        return this.request.headers && this.request.headers['cookie'];
+        return this.request.headers && this.request.headers['cookie'] && this.request.headers['cookie'].indexOf('SESSION') >= 0;
     }
 
     public get<T>(url: string, options: any = {}): Observable<T> {
