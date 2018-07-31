@@ -16,6 +16,7 @@ import { selectDialogIsOpen } from '../dialog';
 
 import * as fromAuth from './auth.actions';
 import * as fromDialog from '../dialog/dialog.actions';
+import * as fromRouter from '../router/router.actions';
 import * as fromSnackbar from '../snackbar/snackbar.actions';
 
 @Injectable()
@@ -48,6 +49,11 @@ export class AuthEffects {
                 catchError((response) => of(new fromAuth.LogoutFailureAction({ response })))
             )
         )
+    );
+
+    @Effect() logoutSuccess = this.actions.pipe(
+        ofType(fromAuth.AuthActionTypes.LOGOUT_SUCCESS),
+        map(() => new fromRouter.GoAction({ path: ['/dashboard'] }))
     );
 
     @Effect() loginSuccess = this.actions.pipe(

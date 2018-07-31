@@ -70,5 +70,6 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
 
 export const isProcessing = (state: AuthState) => state.processing;
 export const isAuthenticated = (state: AuthState) => state.authenticated;
-export const getError = (state: AuthState) => state.error;
 export const getUser = (state: AuthState) => state.user;
+export const getRole = (state: AuthState) => state.user.role;
+export const getError = (state: AuthState) => state.error;
