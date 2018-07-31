@@ -1,14 +1,13 @@
-<mat-drawer-container class="menu-container" autosize>
-  <mat-drawer #drawer class="menu-sidenav" mode="side" opened="true">
+<mat-sidenav-container autosize>
+  <mat-sidenav #drawer mode="side" opened="true" fixedInViewport="true" fixedTopGap="64">
     <mat-nav-list *ngIf="menu | async; let menu">
-      <h3 matSubheader>General</h3>
-      <mat-list-item *ngFor="let menuItem of menu">
+      <mat-list-item *ngFor="let menuItem of menu" routerLinkActive="active">
         <mat-icon matListIcon *ngIf="menuItem.icon">{{menuItem.icon}}</mat-icon>
         <a matLine [routerLink]="menuItem.path">{{menuItem.gloss}}</a>
       </mat-list-item>
     </mat-nav-list>
-  </mat-drawer>
-  <div class="menu-sidenav-content">
+  </mat-sidenav>
+  <mat-sidenav-content>
     <ng-content></ng-content>
-  </div>
-</mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

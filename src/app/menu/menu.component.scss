@@ -1,3 +1,13 @@
-.menu-container {
-  height: 100vh;
+@import "~styles.scss";
+
+.mat-sidenav-container {
+  background: $white;
+}
+
+.mat-sidenav-container .mat-list-item.active {
+  color: $primary;
+}
+
+.mat-sidenav-content {
+  margin: 0px 20px;
 }
