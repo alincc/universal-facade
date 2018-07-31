@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 
 import { AppModule } from './app.module';

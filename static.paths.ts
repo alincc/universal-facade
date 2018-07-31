@@ -1,4 +1,8 @@
 export const ROUTES = [
     '/',
-    '/dashboard',
+    '/news',
+    '/help',
+    '/admin',
+    '/settings',
+    '/profile'
 ];
