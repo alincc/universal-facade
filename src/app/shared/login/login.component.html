@@ -1,0 +1,20 @@
+<facade-dialog [title]="title">
+  <form *ngIf="form | async; let form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidate>
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Username" formControlName="username" autofocus="true" />
+          <mat-error></mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password" />
+          <mat-error></mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="default" type="button" (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="disabled(form)">Login</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</facade-dialog>

@@ -23,8 +23,7 @@ import {
 
 import { AlertComponent } from './alert/alert.component';
 import { DialogComponent } from './dialog/dialog.component';
-import { FormComponent } from './form/form.component';
-import { FormDialogComponent } from './form/dialog/form-dialog.component';
+import { LoginComponent } from './login/login.component';
 
 const MODULES = [
     CommonModule,
@@ -53,13 +52,13 @@ const PIPES = [
 ];
 
 const COMPONENTS = [
-    FormComponent
+
 ];
 
 const ENTRY_COMPONENTS = [
     AlertComponent,
     DialogComponent,
-    FormDialogComponent
+    LoginComponent
 ];
 
 @NgModule({

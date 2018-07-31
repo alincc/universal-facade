@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { AppState } from '../core/store';
 import { User } from '../core/model/user';
 
-import { FormDialogComponent } from '../shared/form/dialog/form-dialog.component';
+import { LoginComponent } from '../shared/login/login.component';
 
 import { selectUser, selectIsAuthenticated } from '../core/store/auth';
 
@@ -37,15 +37,13 @@ export class HeaderComponent implements OnInit {
     public openLoginDialog() {
         this.store.dispatch(new fromDialog.OpenDialogAction({
             dialog: {
-                ref: FormDialogComponent,
+                ref: LoginComponent,
                 config: {
                     dialog: {
-                        autofocus: true,
+                        autofocus: true
                     },
                     instance: {
-                        title: 'Login',
-                        scaffoldName: 'LoginRequest',
-                        submitLabel: 'Login'
+                        title: 'Login'
                     }
                 }
             },

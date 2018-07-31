@@ -1,21 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Action, Store } from '@ngrx/store';
 
 import { defer, of } from 'rxjs';
-import { catchError, map, switchMap, filter } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
+import { AppState } from '..';
 import { User } from '../../model/user';
 
 import { AuthService } from '../../service/auth.service';
 
+import { AlertComponent } from '../../../shared/alert/alert.component';
+
+import { selectDialogIsOpen } from '../dialog';
+
 import * as fromAuth from './auth.actions';
-import * as fromForm from '../form/form.actions';
+import * as fromDialog from '../dialog/dialog.actions';
+import * as fromSnackbar from '../snackbar/snackbar.actions';
 
 @Injectable()
 export class AuthEffects {
 
     constructor(
         private actions: Actions,
+        private store: Store<AppState>,
         private authService: AuthService
     ) {
 
@@ -44,15 +52,44 @@ export class AuthEffects {
 
     @Effect() loginSuccess = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.LOGIN_SUCCESS),
-        map((action: fromAuth.LoginSuccessAction) => action.payload),
-        map((user: User) => new fromForm.SubmitFormSuccessAction({ message: 'Login success!' }))
+        withLatestFrom(this.store.select(selectDialogIsOpen)),
+        map(([state]) => state),
+        switchMap((isOpen: boolean) => [
+            isOpen ? new fromDialog.CloseDialogAction() : undefined,
+            new fromSnackbar.OpenSnackbarAction({
+                snackbar: {
+                    ref: AlertComponent,
+                    config: {
+                        snackbar: {
+                            duration: 15000
+                        },
+                        instance: {
+                            type: 'success',
+                            message: 'Login success!'
+                        }
+                    }
+                }
+            })
+        ].filter((action: Action) => action !== undefined))
     );
 
     @Effect() loginFailure = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.LOGIN_FAILURE),
         map((action: fromAuth.LoginFailureAction) => action.payload),
-        map((payload: { response: any }) => payload.response),
-        map((response: any) => new fromForm.SubmitFormFailureAction({ response }))
+        map((payload: { response: any }) => new fromSnackbar.OpenSnackbarAction({
+            snackbar: {
+                ref: AlertComponent,
+                config: {
+                    snackbar: {
+                        duration: 60000
+                    },
+                    instance: {
+                        type: 'danger',
+                        message: payload.response.error
+                    }
+                }
+            }
+        }))
     );
 
     @Effect() getUser = this.actions.pipe(

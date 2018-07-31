@@ -10,8 +10,6 @@ import * as fromRouter from '@ngrx/router-store';
 
 import * as fromAuth from './auth/auth.reducer';
 import * as fromDialog from './dialog/dialog.reducer';
-import * as fromForm from './form/form.reducer';
-import * as fromScaffold from './scaffold/scaffold.reducer';
 import * as fromSnackbar from './snackbar/snackbar.reducer';
 import * as fromRootStore from './root-store.reducer';
 
@@ -35,8 +33,6 @@ export class CustomRouterStateSerializer implements fromRouter.RouterStateSerial
 export interface AppState {
   auth: fromAuth.AuthState;
   dialog: fromDialog.DialogState;
-  form: fromForm.FormState;
-  scaffold: fromScaffold.ScaffoldState;
   snackbar: fromSnackbar.SnackbarState;
   routerReducer: fromRouter.RouterReducerState;
 }
@@ -44,8 +40,6 @@ export interface AppState {
 export const reducers: ActionReducerMap<AppState> = {
   auth: fromAuth.reducer,
   dialog: fromDialog.reducer,
-  form: fromForm.reducer,
-  scaffold: fromScaffold.reducer,
   snackbar: fromSnackbar.reducer,
   routerReducer: fromRouter.routerReducer
 };
