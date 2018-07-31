@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-
-import { Observable } from 'rxjs';
 
 import { AppState } from '../../core/store';
 
@@ -20,7 +18,7 @@ export class LoginComponent implements OnInit {
 
     @Input() cancel: any;
 
-    public form: Observable<FormGroup>;
+    public form: FormGroup;
 
     constructor(
         private builder: FormBuilder,
@@ -30,31 +28,51 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.form = new Observable((observer) => {
-            const formGroup = this.builder.group({
-                username: new FormControl({
-                    disabled: false
-                }, []),
-                password: new FormControl({
-                    disabled: false
-                }, [])
-            });
-            formGroup.reset();
-            observer.next(formGroup);
-            observer.complete();
+        this.form = this.builder.group({
+            username: new FormControl('', [
+                Validators.required,
+                Validators.minLength(4),
+                Validators.maxLength(32),
+                Validators.pattern('^[a-zA-Z0-9]*$')
+            ]),
+            password: new FormControl('', [
+                Validators.required,
+                Validators.minLength(4),
+                Validators.maxLength(32)
+            ])
         });
     }
 
-    public onSubmit(loginRequest: { username: string, password: string }): void {
-        this.store.dispatch(new this.action(loginRequest));
+    public onSubmit(): void {
+        this.store.dispatch(new this.action(this.form.value));
     }
 
     public onCancel(): void {
         this.cancel();
     }
 
-    public disabled(form: FormGroup): boolean {
-        return !form.valid || form.pristine;
+    public isInvalid(field: string): boolean {
+        const formControl = this.form.controls[field];
+        return formControl.invalid && formControl.dirty;
+    }
+
+    public getErrorMessage(field: string): string {
+        const errors = this.form.controls[field].errors;
+        for (const validation in errors) {
+            if (errors.hasOwnProperty(validation)) {
+                switch (validation) {
+                    case 'required': return field + ' is require';
+                    case 'minlength': return field + ' must be at least ' + errors[validation].requiredLength + ' characters';
+                    case 'maxlength': return field + ' can have no more than ' + errors[validation].requiredLength + ' characters';
+                    case 'pattern': return field + ' can only have alphanumeric characters';
+                    default: return 'unknown error';
+                }
+            }
+        }
+    }
+
+    public disabled(): boolean {
+        return this.form.invalid || this.form.pristine;
     }
 
 }
