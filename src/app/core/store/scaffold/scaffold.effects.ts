@@ -18,7 +18,7 @@ export class ScaffoldEffects {
     }
 
     @Effect() loadScaffold = this.actions.pipe(
-        ofType(fromScaffold.ScaffoldActionTypes.LOAD, fromAuth.AuthActionTypes.LOGIN_SUCCESS, fromAuth.AuthActionTypes.GET_USER),
+        ofType(fromScaffold.ScaffoldActionTypes.LOAD, fromAuth.AuthActionTypes.LOGIN_SUCCESS, fromAuth.AuthActionTypes.LOGOUT_SUCCESS, fromAuth.AuthActionTypes.GET_USER),
         switchMap(() =>
             this.scaffoldService.get().pipe(
                 map((scaffolding: Scaffold[]) => new fromScaffold.LoadScaffoldSuccessAction({ scaffolding })),

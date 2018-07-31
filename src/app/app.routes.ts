@@ -7,6 +7,5 @@ export const routes: Routes = [
     { path: 'admin', loadChildren: './+admin#AdminModule', canActivate: [], pathMatch: 'full', data: {} },
     { path: 'settings', loadChildren: './+settings#SettingsModule', canActivate: [], pathMatch: 'full', data: {} },
     { path: 'profile', loadChildren: './+profile#ProfileModule', canActivate: [], pathMatch: 'full', data: {} },
-    { path: 'logout', loadChildren: './+logout#LogoutModule', canActivate: [], pathMatch: 'full', data: {} },
     { path: '**', redirectTo: 'dashboard' }
 ];

@@ -11,7 +11,6 @@ import * as fromRouter from '@ngrx/router-store';
 import * as fromAuth from './auth/auth.reducer';
 import * as fromDialog from './dialog/dialog.reducer';
 import * as fromForm from './form/form.reducer';
-import * as fromMenu from './menu/menu.reducer';
 import * as fromScaffold from './scaffold/scaffold.reducer';
 import * as fromSnackbar from './snackbar/snackbar.reducer';
 import * as fromRootStore from './root-store.reducer';
@@ -37,7 +36,6 @@ export interface AppState {
   auth: fromAuth.AuthState;
   dialog: fromDialog.DialogState;
   form: fromForm.FormState;
-  menu: fromMenu.MenuState;
   scaffold: fromScaffold.ScaffoldState;
   snackbar: fromSnackbar.SnackbarState;
   routerReducer: fromRouter.RouterReducerState;
@@ -47,7 +45,6 @@ export const reducers: ActionReducerMap<AppState> = {
   auth: fromAuth.reducer,
   dialog: fromDialog.reducer,
   form: fromForm.reducer,
-  menu: fromMenu.reducer,
   scaffold: fromScaffold.reducer,
   snackbar: fromSnackbar.reducer,
   routerReducer: fromRouter.routerReducer

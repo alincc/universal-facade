@@ -53,4 +53,8 @@ export class HeaderComponent implements OnInit {
         }));
     }
 
+    public logout(): void {
+        this.store.dispatch(new fromAuth.LogoutAction());
+    }
+
 }

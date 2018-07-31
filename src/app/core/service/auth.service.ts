@@ -30,6 +30,13 @@ export class AuthService {
         });
     }
 
+    public logout(): Observable<string> {
+        return this.restService.get<string>(environment.service + '/logout', {
+            withCredentials: true,
+            responseType: 'text'
+        });
+    }
+
     public getUser(): Observable<User> {
         return this.restService.get<User>(environment.service + '/user', {
             withCredentials: true

@@ -32,6 +32,16 @@ export class AuthEffects {
         )
     );
 
+    @Effect() logout = this.actions.pipe(
+        ofType(fromAuth.AuthActionTypes.LOGOUT),
+        switchMap(() =>
+            this.authService.logout().pipe(
+                map((response: any) => new fromAuth.LogoutSuccessAction({ message: response.message })),
+                catchError((response) => of(new fromAuth.LogoutFailureAction({ response })))
+            )
+        )
+    );
+
     @Effect() loginSuccess = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.LOGIN_SUCCESS),
         map((action: fromAuth.LoginSuccessAction) => action.payload),

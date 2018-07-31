@@ -26,6 +26,11 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
                 user: undefined,
                 error: undefined
             };
+        case AuthActionTypes.LOGOUT:
+            return {
+                ...state,
+                processing: true
+            };
         case AuthActionTypes.LOGIN_SUCCESS:
         case AuthActionTypes.GET_USER_SUCCESS:
             return {
@@ -34,6 +39,20 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
                 authenticated: true,
                 user: action.payload.user,
                 error: undefined
+            };
+        case AuthActionTypes.LOGOUT_SUCCESS:
+            return {
+                ...state,
+                processing: false,
+                authenticated: false,
+                user: undefined,
+                error: undefined
+            };
+        case AuthActionTypes.LOGOUT_FAILURE:
+            return {
+                ...state,
+                processing: false,
+                error: action.payload.response
             };
         case AuthActionTypes.LOGIN_FAILURE:
         case AuthActionTypes.GET_USER_FAILURE:

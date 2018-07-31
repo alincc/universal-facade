@@ -7,7 +7,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { MenuComponent } from './menu/menu.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { metaReducers, reducers } from './core/store';
 
@@ -22,7 +22,7 @@ describe('AppComponent', () => {
             declarations: [
                 AppComponent,
                 HeaderComponent,
-                MenuComponent
+                SidenavComponent
             ],
             imports: [
                 SharedModule,
