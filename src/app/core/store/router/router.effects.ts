@@ -2,11 +2,16 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 
-import { map } from 'rxjs/operators';
+import { filter, map, withLatestFrom } from 'rxjs/operators';
 
+import { AppState } from '..';
+
+import { selectLoginRedirect } from '../auth';
+
+import * as fromAuth from '../auth/auth.actions';
 import * as fromRouter from './router.actions';
-import * as fromSnackbar from '../snackbar/snackbar.actions';
 
 @Injectable()
 export class RouterEffects {
@@ -14,14 +19,15 @@ export class RouterEffects {
     constructor(
         private actions: Actions,
         private router: Router,
-        private location: Location
+        private location: Location,
+        private store: Store<AppState>
     ) {
 
     }
 
     @Effect({ dispatch: false }) navigate = this.actions.pipe(
         ofType(fromRouter.RouterActionTypes.GO),
-        map((action: fromRouter.GoAction) => action.payload),
+        map((action: fromRouter.Go) => action.payload),
         map(({ path, query: queryParams, extras }) => this.router.navigate(path, { queryParams, ...extras }))
     );
 
@@ -37,7 +43,10 @@ export class RouterEffects {
 
     @Effect() navigation = this.actions.pipe(
         ofType('ROUTER_NAVIGATION'),
-        map(() => new fromSnackbar.DismissSnackbarAction())
+        withLatestFrom(this.store.select(selectLoginRedirect)),
+        map(([action, navigation]) => navigation),
+        filter((navigation: fromRouter.RouterNavigation) => navigation !== undefined),
+        map(() => new fromAuth.UnsetLoginRedirectAction())
     );
 
 }

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { defer, of } from 'rxjs';
-import { catchError, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { AppState } from '..';
 import { User } from '../../model/user';
@@ -13,6 +13,7 @@ import { AuthService } from '../../service/auth.service';
 import { AlertComponent } from '../../../shared/alert/alert.component';
 
 import { selectDialogIsOpen } from '../dialog';
+import { selectLoginRedirect } from '../auth';
 
 import * as fromAuth from './auth.actions';
 import * as fromDialog from '../dialog/dialog.actions';
@@ -41,28 +42,18 @@ export class AuthEffects {
         )
     );
 
-    @Effect() logout = this.actions.pipe(
-        ofType(fromAuth.AuthActionTypes.LOGOUT),
-        switchMap(() =>
-            this.authService.logout().pipe(
-                map((response: any) => new fromAuth.LogoutSuccessAction({ message: response.message })),
-                catchError((response) => of(new fromAuth.LogoutFailureAction({ response })))
-            )
-        )
-    );
-
-    @Effect() logoutSuccess = this.actions.pipe(
-        ofType(fromAuth.AuthActionTypes.LOGOUT_SUCCESS),
-        map(() => new fromRouter.GoAction({ path: ['/dashboard'] }))
-    );
-
     @Effect() loginSuccess = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.LOGIN_SUCCESS),
         withLatestFrom(this.store.select(selectDialogIsOpen)),
-        map(([state]) => state),
-        switchMap((isOpen: boolean) => [
-            isOpen ? new fromDialog.CloseDialogAction() : undefined,
-            new fromSnackbar.OpenSnackbarAction({
+        withLatestFrom(this.store.select(selectLoginRedirect)),
+        map(([[action, isOpen], navigation]) => {
+            if (isOpen) {
+                this.store.dispatch(new fromDialog.CloseDialogAction());
+            }
+            if (navigation) {
+                this.store.dispatch(new fromRouter.Go(navigation));
+            }
+            return new fromSnackbar.OpenSnackbarAction({
                 snackbar: {
                     ref: AlertComponent,
                     config: {
@@ -75,8 +66,8 @@ export class AuthEffects {
                         }
                     }
                 }
-            })
-        ].filter((action: Action) => action !== undefined))
+            });
+        })
     );
 
     @Effect() loginFailure = this.actions.pipe(
@@ -98,6 +89,21 @@ export class AuthEffects {
         }))
     );
 
+    @Effect() logout = this.actions.pipe(
+        ofType(fromAuth.AuthActionTypes.LOGOUT),
+        switchMap(() =>
+            this.authService.logout().pipe(
+                map((response: any) => new fromAuth.LogoutSuccessAction({ message: response.message })),
+                catchError((response) => of(new fromAuth.LogoutFailureAction({ response })))
+            )
+        )
+    );
+
+    @Effect() logoutSuccess = this.actions.pipe(
+        ofType(fromAuth.AuthActionTypes.LOGOUT_SUCCESS),
+        map(() => new fromRouter.Go({ path: ['/dashboard'] }))
+    );
+
     @Effect() getUser = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.GET_USER),
         switchMap(() =>
@@ -110,8 +116,18 @@ export class AuthEffects {
 
     @Effect() checkSession = this.actions.pipe(
         ofType(fromAuth.AuthActionTypes.CHECK_SESSION),
-        filter(() => this.authService.hasSession()),
-        map(() => new fromAuth.GetUserAction())
+        map(() => new fromAuth.SessionStatusAction({ authenticated: this.authService.hasSession() }))
+    );
+
+    @Effect({ dispatch: false }) sessionStatus = this.actions.pipe(
+        ofType(fromAuth.AuthActionTypes.SESSION_STATUS),
+        map((action: fromAuth.SessionStatusAction) => action.payload),
+        map((payload: { authenticated: boolean }) => payload.authenticated),
+        map((authenticated: boolean) => {
+            if (authenticated) {
+                this.store.dispatch(new fromAuth.GetUserAction());
+            }
+        })
     );
 
     @Effect() init = defer(() => {

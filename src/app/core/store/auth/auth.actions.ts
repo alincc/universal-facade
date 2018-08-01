@@ -1,4 +1,6 @@
 import { Action } from '@ngrx/store';
+
+import { RouterNavigation } from '../router/router.actions';
 import { User } from '../../model/user';
 
 export enum AuthActionTypes {
@@ -11,7 +13,10 @@ export enum AuthActionTypes {
     GET_USER = '[Auth] get user',
     GET_USER_SUCCESS = '[Auth] success getting user',
     GET_USER_FAILURE = '[Auth] failed getting user',
-    CHECK_SESSION = '[Auth] check session'
+    CHECK_SESSION = '[Auth] check session',
+    SESSION_STATUS = '[Auth] session status',
+    SET_LOGIN_REDIRECT = '[Auth] set login redirect',
+    UNSET_LOGIN_REDIRECT = '[Auth] unset login redirect'
 }
 
 export class LoginAction implements Action {
@@ -61,6 +66,20 @@ export class CheckSessionAction implements Action {
     readonly type = AuthActionTypes.CHECK_SESSION;
 }
 
+export class SessionStatusAction implements Action {
+    readonly type = AuthActionTypes.SESSION_STATUS;
+    constructor(public payload: { authenticated: boolean }) { }
+}
+
+export class SetLoginRedirectAction implements Action {
+    readonly type = AuthActionTypes.SET_LOGIN_REDIRECT;
+    constructor(public payload: RouterNavigation) { }
+}
+
+export class UnsetLoginRedirectAction implements Action {
+    readonly type = AuthActionTypes.UNSET_LOGIN_REDIRECT;
+}
+
 export type AuthActions =
     LoginAction |
     LoginSuccessAction |
@@ -71,4 +90,7 @@ export type AuthActions =
     GetUserAction |
     GetUserSuccessAction |
     GetUserFailureAction |
-    CheckSessionAction;
+    CheckSessionAction |
+    SessionStatusAction |
+    SetLoginRedirectAction |
+    UnsetLoginRedirectAction;

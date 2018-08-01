@@ -1,10 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { RouterStateSnapshot, Params } from '@angular/router';
 
-import {
-  ActionReducerMap,
-  MetaReducer
-} from '@ngrx/store';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 
 import * as fromRouter from '@ngrx/router-store';
 
