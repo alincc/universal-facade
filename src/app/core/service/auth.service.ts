@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
@@ -7,7 +8,7 @@ import { User } from '../model/user';
 import { RestService } from './rest.service';
 
 import { environment } from '../../../environments/environment';
-import { HttpHeaders } from '@angular/common/http';
+
 
 @Injectable()
 export class AuthService {

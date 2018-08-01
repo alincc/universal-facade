@@ -3,24 +3,30 @@
     <span>Universal Facade</span>
     <span class="toolbar-spacer"></span>
     <span *ngIf="!(authenticated | async)" class="toolbar-link" (click)="openLoginDialog()">Login</span>
-    <button *ngIf="user | async; let user" mat-button [matMenuTriggerFor]="userMenu">
-      <span>{{user.username}}</span>
-      <mat-icon>arrow_drop_down</mat-icon>
-    </button>
-    <mat-menu #userMenu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>person_outline</mat-icon>
-        <span [routerLink]="['/profile']" routerLinkActive="active">Profile</span>
+    <span *ngIf="user | async; let user">
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <span>{{user.username}}</span>
+        <mat-icon>arrow_drop_down</mat-icon>
       </button>
-      <button mat-menu-item>
-        <mat-icon>settings</mat-icon>
-        <span [routerLink]="['/settings']" routerLinkActive="active">Settings</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>exit_to_app</mat-icon>
-        <span (click)="logout()">Logout</span>
-      </button>
-    </mat-menu>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>person_outline</mat-icon>
+          <span [routerLink]="['/profile']" routerLinkActive="active">Profile</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span [routerLink]="['/settings']" routerLinkActive="active">Settings</span>
+        </button>
+        <button mat-menu-item *ngIf="isAdmin(user)">
+          <mat-icon>supervisor_account</mat-icon>
+          <span [routerLink]="['/admin']" routerLinkActive="active">Admin</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span (click)="logout()">Logout</span>
+        </button>
+      </mat-menu>
+    </span>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-toolbar color="secondary" class="mat-elevation-z6">

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { AppState } from '../core/store';
-import { User } from '../core/model/user';
+import { User, Role } from '../core/model/user';
 
 import { LoginComponent } from '../shared/login/login.component';
 
@@ -53,6 +53,10 @@ export class HeaderComponent implements OnInit {
 
     public logout(): void {
         this.store.dispatch(new fromAuth.LogoutAction());
+    }
+
+    public isAdmin(user: User): boolean {
+        return Role[user.role] === Role.ROLE_ADMIN;
     }
 
 }

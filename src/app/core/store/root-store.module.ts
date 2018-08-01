@@ -7,6 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 
 import { AuthEffects } from './auth/auth.effects';
+import { UsersEffects } from './users/users.effects';
 import { DialogEffects } from './dialog/dialog.effects';
 import { RouterEffects } from './router/router.effects';
 import { SnackbarEffects } from './snackbar/snackbar.effects';
@@ -26,6 +27,7 @@ import { CustomRouterStateSerializer, reducerProvider, metaReducers, reducerToke
             SnackbarEffects,
             RouterEffects,
             DialogEffects,
+            UsersEffects,
             AuthEffects
         ]),
         StoreDevtoolsModule.instrument({

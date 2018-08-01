@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AuthGuard } from './guard/auth.guard';
 import { AuthService } from './service/auth.service';
+import { UsersService } from './service/users.service';
 import { RestService } from './service/rest.service';
 
 const MODULES = [
@@ -16,7 +17,8 @@ const COMPONENTS = [
 const PROVIDERS = [
     AuthGuard,
     AuthService,
-    RestService
+    RestService,
+    UsersService
 ];
 
 @NgModule({
