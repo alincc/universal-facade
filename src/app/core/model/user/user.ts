@@ -1,7 +1,7 @@
 import { Role } from './role';
-import { StructureEntity } from '../structure-entity';
+import { SdrStructureEntity } from '../sdr/sdr-structure-entity';
 
-export interface User extends StructureEntity {
+export interface User extends SdrStructureEntity {
     readonly role: Role;
     readonly username: string;
 }

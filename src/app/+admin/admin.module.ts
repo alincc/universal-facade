@@ -4,10 +4,15 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../shared/shared.module';
 import { AdminComponent } from './admin.component';
+import { UsersComponent } from './users/users.component';
+
 import { routes } from './admin.routes';
 
 @NgModule({
-    declarations: [AdminComponent],
+    declarations: [
+        AdminComponent,
+        UsersComponent
+    ],
     imports: [
         CommonModule,
         SharedModule,

@@ -8,6 +8,7 @@ import { User } from '../../model/user';
 import { UsersService } from '../../service/users.service';
 
 import * as fromUsers from './users.actions';
+import { SdrCollection } from '../../model/sdr/sdr-collection';
 
 @Injectable()
 export class UsersEffects {
@@ -20,8 +21,7 @@ export class UsersEffects {
         ofType(fromUsers.UsersActionTypes.LOAD),
         switchMap(() =>
             this.userService.getAll().pipe(
-                map((response: any) => response._embedded.users),
-                map((users: User[]) => new fromUsers.LoadUsersSuccessAction({ users })),
+                map((collection: SdrCollection) => new fromUsers.LoadUsersSuccessAction({ collection })),
                 catchError((error) => of(new fromUsers.LoadUsersFailureAction({ error })))
             )
         )

@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AdminComponent } from './admin.component';
+import { UsersComponent } from './users/users.component';
 
 import { routes } from './admin.routes';
 
@@ -13,7 +14,8 @@ describe('AdminComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                AdminComponent
+                AdminComponent,
+                UsersComponent
             ],
             imports: [
                 RouterTestingModule.withRoutes(routes)

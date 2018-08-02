@@ -3,8 +3,12 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { UsersActions, UsersActionTypes } from './users.actions';
 
 import { User } from '../../model/user';
+import { SdrPage } from '../../model/sdr/sdr-page';
+import { SdrCollectionLinks } from '../../model/sdr/sdr-collection-links';
 
 export interface UsersState extends EntityState<User> {
+    page: SdrPage;
+    links: SdrCollectionLinks;
     loading: boolean;
     error: any;
 }
@@ -14,6 +18,8 @@ export const adapter: EntityAdapter<User> = createEntityAdapter<User>({
 });
 
 export const initialState: UsersState = adapter.getInitialState({
+    page: undefined,
+    links: undefined,
     loading: false,
     error: undefined
 });
@@ -27,8 +33,10 @@ export function reducer(state = initialState, action: UsersActions): UsersState 
                 error: undefined
             };
         case UsersActionTypes.LOAD_SUCCESS:
-            return adapter.addAll(action.payload.users, {
+            return adapter.addAll(action.payload.collection._embedded.users, {
                 ...state,
+                page: action.payload.collection.page,
+                links: action.payload.collection._links,
                 loading: false,
                 error: undefined
             });

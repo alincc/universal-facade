@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { RestService } from './rest.service';
 
 import { environment } from '../../../environments/environment';
+import { SdrCollection } from '../model/sdr/sdr-collection';
 
 @Injectable()
 export class UsersService {
@@ -13,14 +14,10 @@ export class UsersService {
 
     }
 
-    public getAll(): Observable<any> {
-        const users = this.restService.get<any>(environment.service + '/users', {
+    public getAll(): Observable<SdrCollection> {
+        return this.restService.get<SdrCollection>(environment.service + '/users', {
             withCredentials: true
         });
-        users.subscribe((res: any) => {
-            console.log(res);
-        });
-        return users;
     }
 
 }

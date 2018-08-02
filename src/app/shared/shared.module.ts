@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+// TODO: move material module import closest to use
+
 import {
     MatInputModule,
     MatFormFieldModule,
@@ -18,7 +20,8 @@ import {
     MatGridListModule,
     MatCheckboxModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule
 } from '@angular/material';
 
 import { AlertComponent } from './alert/alert.component';
@@ -34,6 +37,7 @@ const MODULES = [
     MatFormFieldModule,
     MatButtonModule,
     MatMenuModule,
+    MatTabsModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,

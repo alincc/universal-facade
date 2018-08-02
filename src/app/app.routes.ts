@@ -10,7 +10,7 @@ export const routes: Routes = [
     { path: 'settings', loadChildren: './+settings#SettingsModule', canActivate: [AuthGuard], pathMatch: 'full' },
     { path: 'profile', loadChildren: './+profile#ProfileModule', canActivate: [AuthGuard], pathMatch: 'full' },
     {
-        path: 'admin', loadChildren: './+admin#AdminModule', canActivate: [AuthGuard], pathMatch: 'full', data: {
+        path: 'admin', loadChildren: './+admin#AdminModule', canActivate: [AuthGuard], data: {
             roles: [Role.ROLE_SUPER_ADMIN, Role.ROLE_ADMIN]
         }
     },

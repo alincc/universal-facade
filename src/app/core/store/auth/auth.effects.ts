@@ -13,7 +13,7 @@ import { AuthService } from '../../service/auth.service';
 import { AlertComponent } from '../../../shared/alert/alert.component';
 
 import { selectDialogIsOpen } from '../dialog';
-import { selectLoginRedirect } from '../auth';
+import { selectLoginRedirect } from '.';
 
 import * as fromAuth from './auth.actions';
 import * as fromDialog from '../dialog/dialog.actions';

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { User } from '../../model/user';
+import { SdrCollection } from '../../model/sdr/sdr-collection';
 
 export enum UsersActionTypes {
     LOAD = '[Users] load users',
@@ -13,7 +13,7 @@ export class LoadUsersAction implements Action {
 
 export class LoadUsersSuccessAction implements Action {
     readonly type = UsersActionTypes.LOAD_SUCCESS;
-    constructor(public payload: { users: User[] }) { }
+    constructor(public payload: { collection: SdrCollection }) { }
 }
 
 export class LoadUsersFailureAction implements Action {
